@@ -3,7 +3,7 @@
 std::ostream& operator<<(std::ostream& out, const User& user)
 {
   user.print();
-  out<<std::endl;
+  out<<" "<<user.getUnob()<<std::endl;
   user.getDate().printDate();
 
   return out;

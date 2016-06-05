@@ -11,14 +11,12 @@ class Person
   private: 
     std::string _name;
     std::string _surname;
-    std::string _unof; // unique number of birth
   public:
     Person()=default;
-    Person(const std::string& name, const std::string& surname,const std::string& unof) : _name(name), _surname(surname), _unof(unof) {};
+    Person(const std::string& name, const std::string& surname) : _name(name), _surname(surname){};
     std::string getName() const{return _name;}
     std::string getSurname() const{return _surname;}
-    std::string getUnof() const{return _unof;}
-    void setPerson(const std::string& name, const std::string& surname, const std::string& unof); 
+    void setPerson (const std::string& name, const std::string& surname); 
     void print() const;
     ~Person()=default;   
 
