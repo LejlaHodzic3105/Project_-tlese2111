@@ -416,7 +416,7 @@ class list<Type>::const_iterator : public std::iterator<std::forward_iterator_ta
 };
 
 template<typename Type>
-typename list<Type>::iterator list<Type>::insert(const_iterator position,const Type& val){
+void list<Type>::insert(const_iterator position,const Type& val){
 if(empty())
 (*this).push_back(val);
 
@@ -431,8 +431,6 @@ last=newNode;
 newNode->setNext((*position).getNext());
 (*position).setNext(newNode);
 count++;
-iterator it=newNode;
-return it;
 
 }  
 
@@ -440,7 +438,7 @@ return it;
 }
 
 template<typename Type>
-typename list<Type>::iterator list<Type>::insert (const_iterator position, Type&& val){
+void list<Type>::insert (const_iterator position, Type&& val){
 if(empty())
 (*this).push_back(val);
 
@@ -455,8 +453,6 @@ last=newNode;
 newNode->setNext((*position).getNext());
 (*position).setNext(newNode);
 count++;
-iterator it=newNode;
-return it;
 
 }  
 

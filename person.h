@@ -17,8 +17,9 @@ class Person
     std::string getName() const{return _name;}
     std::string getSurname() const{return _surname;}
     void setPerson (const std::string& name, const std::string& surname); 
-    void print() const;
-    ~Person()=default;   
+    void printPerson() const;
+    ~Person()=default;
+    friend std::ostream& operator<<(std::ostream& out, const Person& person); 
 
 };
 

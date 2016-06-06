@@ -6,8 +6,15 @@ void Person::setPerson(const std::string& name, const std::string& surname)
   _surname=surname;
 }
 
- void Person::print() const
+ void Person::printPerson() const
 {
-  std::cout<<"Person: "<<_name << " " <<_surname;
+  std::cout<<_name << " " <<_surname;
+}
+
+
+std::ostream& operator<<(std::ostream& out, const Person& person)
+{
+  out<<person._name<<" "<<person._surname;
+  return out;
 }
 
