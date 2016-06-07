@@ -19,7 +19,7 @@ ListUsers& ListUsers::addUser(User& user){
         if(user.getDate().getMonth()>=month){
           br++;
           if(user.getDate().getDay()>=day){
-            auto p=insert(it,user);
+            insert(it,user);
             br=0;
             return *this;
           }
@@ -48,3 +48,25 @@ void ListUsers::printListUsers()const{
 
 }
 
+User& ListUsers::findUserByName(const std::string& name, const std::string& surname){
+  auto it=(*this).begin();
+  while(it!=(*this).end()){
+        if((*it).getInfo().getName()==name && (*it).getInfo().getSurname()==surname) return (*it).getInfo();
+	++it;
+  }
+}
+
+User& ListUsers::findUserByUsername(const std::string& username){
+   auto it=(*this).begin();
+  while(it!=(*this).end()){
+        if((*it).getInfo().getUserAcc().getUsername()==username) return (*it).getInfo();
+	++it;
+  }
+}
+
+void ListUsers::removeUser(const std::string &s1, const std::string &s2){
+  User remove;
+  if(s2=="") remove=findUserByUsername(s1);
+  else remove=findUserByName(s1,s2);
+  pop(remove);
+}

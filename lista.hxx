@@ -31,8 +31,9 @@ class list
         void pop_back(); // Uklanja zadnji elemenat liste, 0(n),smanjuje velicinu za 1
         void pop_front(); // Uklanja prvi elemenat liste,O(1),smanjuje velicinu za 1
         //Ubacuju elemenat iza odjedjene pozicije , koja je proslijedjena u metod,O(1)
-      iterator insert (const_iterator position, const Type& val);
-       iterator insert (const_iterator position, Type&& val);
+	void pop(Type& val);
+      void insert (const_iterator position, const Type& val);
+       void insert (const_iterator position, Type&& val);
         
         // Pristup elementima
         Type& front();   // Vraca referencu na prvi elemenat liste,O(1)
@@ -459,9 +460,26 @@ count++;
 
   }
 
-
-
-
-
-
+template<typename Type>
+void list<Type>::pop(Type& val){
+nodeType<Type> *temp;
+  temp=first;
+  if(!empty())
+  {
+  if(first->getNext()==nullptr)
+  {
+  delete first;
+  first=nullptr;
+  last=nullptr;
+  count=0;
+  }
+  else if(temp->getInfo()==val){first=first->getNext(); count--;}
+  else{while(temp->getNext()->getInfo()!=val){temp=temp->getNext();}
+  temp->setNext(temp->getNext()->getNext());
+  if(temp->getNext()==nullptr) last=temp;
+  delete temp->getNext();
+  count--;
+ }
+}
+}
 #endif

@@ -10,6 +10,9 @@ class ListUsers :public list<User>{
     ListUsers(){}
     ListUsers& addUser(User&); // dodaje korisnika u listu,i sortira, O(n)
     void printListUsers()const;
+    User& findUserByName(const std::string& name, const std::string& surname);
+    User& findUserByUsername(const std::string& username);
+    void removeUser(const std::string &s1, const std::string &s2="");
 
 };
 
