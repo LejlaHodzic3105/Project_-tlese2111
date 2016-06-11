@@ -9,35 +9,42 @@ std::ostream& operator<<(std::ostream& out, const User& user)
   return out;
 }
 
-void User::borrowFilm(const Film& film){
-  if(_nobf==3) cout << "Mozete posuditi maksimalno tri filma. Molimo pokusajte ponovo nakon sto vratite neki od filmova." << endl;
+void User::borrowFilm(Film& film){
+  if(film.getNumOfCopies()==0) cout<<"Film trenutno nije dostupan!"<<std::endl;
+  else if(_nobf==3) cout << "Mozete posuditi maksimalno tri filma. Molimo pokusajte ponovo nakon sto vratite neki od filmova." << std::endl;
   else{
   _nobf++;
-  _borrowedFilms.dodajNaKraj(film);
-  _history.dodajNaKraj(film);
+  _borrowedFilms.push_back(film);
+  _history.push_back(film);
+  film.setNumOfCopies(film.getNumOfCopies()-1);
   cout << "Uspjesno ste posudili film." << endl;
 }
 }
 
-void User::returnFilm(const Film& film){
+void User::returnFilm(Film& film){
   _nobf--;
-  _borrowedFilms.ukloni(film);
+  film.setNumOfCopies(film.getNumOfCopies()+1);
+  _borrowedFilms.pop(film);
   cout << "Uspjesno ste vratili film." << endl;
 }
 
 void User::printHistory(){
-  for(int i=0;i<_history.velicina();i++)
+  auto it=_history.begin();
+  while(it!=_history.end())
   {
-    _history.dohvatiEl(i).printFilm();
+    (*it).getInfo().printFilm();
+    it++;
   }
-}
+ }
 
 void User::printBorrowedFilms(){
-  for(int i=0;i<_borrowedFilms.velicina();i++)
+  auto it=_borrowedFilms.begin();
+  while(it!=_borrowedFilms.end())
   {
-    _borrowedFilms.dohvatiEl(i).printFilm();
+    (*it).getInfo().printFilm();
+    it++;
   }
-}
+ }
 
 bool User::operator==(const User& user){
   return _useracc.getUsername()==user._useracc.getUsername();

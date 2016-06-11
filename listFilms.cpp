@@ -3,65 +3,76 @@
 
 ListFilms& ListFilms::addFilm(Film& film)
 {
-  if(prazna())
-    dodajNaKraj(film);
+  if(empty())
+    push_back(film);
 
   else
   {
-    for(int i=0;i<(*this).velicina();i++)
-    {
-      if(elementi[i].getYear()<film.getYear())
-      {
-        dodajNaLokaciju(i,film);
-        return *this;
-      }
-      else
-      {
-        i++;
-      }
+    ListFilms::const_iterator it=(*this).begin();
+    while(it!=(*this).end()){
+        if((*it).getInfo().getYear()<film.getYear())
+        {
+          insert(it,film);
+          return *this;
+        }
+        it++;
     }
+    
+push_back(film);
   }
-dodajNaKraj(film);
   return *this;
 }
 
 
 void ListFilms::printListFilms()const
 {
-  for(int i=0;i<(*this).velicina();i++)
-    elementi[i].printFilm();
+  auto it=(*this).begin();
+  while(it!=(*this).end())
+  {
+    (*it).getInfo().printFilm();
+  }
 }
 
 Film& ListFilms::findFilm(const string& film)const{
-  ListFilms foundFilms((*this).velicina()); //lista pronadjenih filmova moze maksimalno biti duga listi svih filmova
-  for(int i=0;i<(*this).velicina();i++)
+  ListFilms foundFilms; //lista pronadjenih filmova moze maksimalno biti duga listi svih filmova
+  auto it=(*this).begin();
+  while(it!=(*this).end())
   {
-    if(elementi[i].getTitle()==film) //ako se u listi filmova nadje film sa ciljanim imenom dodaj ga u listu pronadjenih filmova
+    if((*it).getInfo().getTitle()==film)//ako se u listi filmova nadje film sa ciljanim imenom dodaj ga u listu pronadjenih filmova
     {
-       foundFilms.dodajNaKraj(elementi[i]);
+      foundFilms.push_back((*it).getInfo());
     }
-  if(foundFilms.velicina()==0) std::cout << "Film sa trazenim imenom nije pronadjen!" << std::endl;
-  else if(foundFilms.velicina()==1) return foundFilms.elementi[0];
-  else{
-    std::cout << "Pronadjeno je " << foundFilms.velicina() << " filmova sa imenom " << film << ". Molimo unesite jedinstveni kljuc za trazeni film iz liste ponudjenih kljuceva: ";
-    for(int i=0;i<foundFilms.velicina();i++)
+    if(foundFilms.size()==0) std::cout<<"Film sa trazenim imenom nije pronadjen!"<<std::endl;
+    else if(foundFilms.size()==1) return foundFilms.front();
+    else
     {
-      std::cout << foundFilms.elementi[i].getKey() << ' ';
+      std::cout<<"Pronadjeno je "<<foundFilms.size()<< " filmova sa imenom "<< film<< ". Molimo unseite jedinstveni kljuc za trazeni film iz liste pronadjenih kljuceva: ";
+      auto p=foundFilms.begin();
+      while(p!=foundFilms.end())
+      {
+        std::cout<< (*it).getInfo().getKey()<< ' ';
+        p++;
+      }
+      std::cout<<std::endl;
+      int kljuc;
+      std::cin>>kljuc;
+      auto k=foundFilms.begin();
+      while(k!=foundFilms.end())
+      {
+       if((*it).getInfo().getKey()==kljuc) return (*it).getInfo();
+       k++;
+
+      }
+
     }
-    std::cout << std::endl;
-    int kljuc;
-    std::cin >> kljuc;
-    for(int i=0;i<foundFilms.velicina();i++)
-    {
-      if(foundFilms.elementi[i].getKey()==kljuc) return foundFilms.elementi[i];
-    }
+    it++;
   }
-}
-}
+  throw std::string("Film nije pronadjen!");
+ }
 
 void ListFilms::removeFilm(const string& film){
-  Film remove=findFilm(film);
-  ukloni(remove);
+  Film removeF=findFilm(film);
+  pop(removeF);
 }
 
 void ListFilms::updateFilm(const string& film){
