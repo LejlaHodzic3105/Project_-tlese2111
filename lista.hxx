@@ -418,45 +418,54 @@ class list<Type>::const_iterator : public std::iterator<std::forward_iterator_ta
 
 template<typename Type>
 void list<Type>::insert(const_iterator position,const Type& val){
-if(empty())
-(*this).push_back(val);
+  if(empty())
+  (*this).push_back(val);
+  else{
+  nodeType<Type> *newNode;
+  newNode=new nodeType<Type>;
+  newNode->setInfo(val);
+   if((*position).getNext()==nullptr){
+   last=newNode;
+   }
+  newNode->setNext((*position).getNext());
+  (*position).setNext(newNode);
+  nodeType<Type> *temp;
+  temp=new nodeType<Type>;
+  temp->setInfo((*position).getInfo());
+  (*position).setInfo(newNode->getInfo());
+  newNode->setInfo(temp->getInfo());
+  count++;
 
-else{
-nodeType<Type> *newNode;
-newNode=new nodeType<Type>;
-newNode->setInfo(val);
-if((*position).getNext()==nullptr){
-last=newNode;
-
- }
-newNode->setNext((*position).getNext());
-(*position).setNext(newNode);
-count++;
-
-}  
+  
 
 
 }
 
+
+}
+
+
 template<typename Type>
 void list<Type>::insert (const_iterator position, Type&& val){
-if(empty())
-(*this).push_back(val);
+  if(empty())
+  (*this).push_back(val);
+  else{
+  nodeType<Type> *newNode;
+  newNode=new nodeType<Type>;
+  newNode->setInfo(val);
+   if((*position).getNext()==nullptr){
+   last=newNode;
+   }
+  newNode->setNext((*position).getNext());
+  (*position).setNext(newNode);
+  nodeType<Type> *temp;
+  temp=new nodeType<Type>;
+  temp->setInfo((*position).getInfo());
+  (*position).setInfo(newNode->getInfo());
+  newNode->setInfo(temp->getInfo());
+  count++;
 
-else{
-nodeType<Type> *newNode;
-newNode=new nodeType<Type>;
-newNode->setInfo(val);
-if((*position).getNext()==nullptr){
-last=newNode;
-
- }
-newNode->setNext((*position).getNext());
-(*position).setNext(newNode);
-count++;
-
-}  
-
+}
 
   }
 
