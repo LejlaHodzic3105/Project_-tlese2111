@@ -1,5 +1,5 @@
 #include "listFilms.h"
-
+#include<algorithm>
 
 ListFilms& ListFilms::addFilm(Film& film)
 {
@@ -25,12 +25,13 @@ push_back(film);
 
 
 void ListFilms::printListFilms()const
-{
-  auto it=(*this).begin();
+{ if(empty()) std::cout << "There are no films available" << std::endl;
+  else{auto it=(*this).begin();
   while(it!=(*this).end())
   {
     (*it).getInfo().printFilm();
-  }
+    ++it;
+  }}
 }
 
 Film& ListFilms::findFilm(const string& film)const{
@@ -42,6 +43,8 @@ Film& ListFilms::findFilm(const string& film)const{
     {
       foundFilms.push_back((*it).getInfo());
     }
+  it++;
+  }
     if(foundFilms.size()==0) std::cout<<"Film sa trazenim imenom nije pronadjen!"<<std::endl;
     else if(foundFilms.size()==1) return foundFilms.front();
     else
@@ -50,7 +53,7 @@ Film& ListFilms::findFilm(const string& film)const{
       auto p=foundFilms.begin();
       while(p!=foundFilms.end())
       {
-        std::cout<< (*it).getInfo().getKey()<< ' ';
+        std::cout<< (*p).getInfo().getKey()<< ' ';
         p++;
       }
       std::cout<<std::endl;
@@ -59,16 +62,14 @@ Film& ListFilms::findFilm(const string& film)const{
       auto k=foundFilms.begin();
       while(k!=foundFilms.end())
       {
-       if((*it).getInfo().getKey()==kljuc) return (*it).getInfo();
+       if((*k).getInfo().getKey()==kljuc) return (*k).getInfo();
        k++;
 
       }
 
     }
-    it++;
-  }
   throw std::string("Film nije pronadjen!");
- }
+ }	
 
 void ListFilms::removeFilm(const string& film){
   Film removeF=findFilm(film);

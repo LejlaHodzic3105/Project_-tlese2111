@@ -468,12 +468,12 @@ nodeType<Type> *temp;
   {
   if(first->getNext()==nullptr)
   {
-  delete first;
+  delete temp;
   first=nullptr;
   last=nullptr;
   count=0;
   }
-  else if(temp->getInfo()==val){first=first->getNext(); count--;}
+  else if(temp->getInfo()==val){first=first->getNext(); count--; delete temp;}
   else{while(temp->getNext()->getInfo()!=val){temp=temp->getNext();}
   temp->setNext(temp->getNext()->getNext());
   if(temp->getNext()==nullptr) last=temp;
