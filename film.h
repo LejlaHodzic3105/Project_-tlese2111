@@ -41,15 +41,19 @@ class Film
    void setNumOfCopies(int num){_numOfCopies=num;}
    void setKey(int num){_key=num;}
    void setDirector(const std::string& name,const std::string& surname){_director.setPerson(name,surname);}
-   void setProducents(Person&& producent){_listOfProducents.push_back(producent);}
-   void setScenarists(Person&& scenarist){_listOfScenarists.push_back(scenarist);}
-   void setActors(Person&& actor){_listOfActors.push_back(actor);}
+   void setProducents(const Person &producent){_listOfProducents.push_back(producent);}
+   void setScenarists(const Person scenarist){_listOfScenarists.push_back(scenarist);}
+   void setActors(const Person actor){_listOfActors.push_back(actor);}
    void printFilm()const{std::cout<<_title <<" "<< _year<<std::endl;} // pregled sadrzaja videoteke,svi filmovi sortirani po godini 
    bool operator==(const Film &film);
    bool operator!=(const Film &film);
    void clearProducents(){ _listOfProducents.clear();} //za azuriranje, kada zeli da promijeni producente, moramo prvo isprazniti listu postojecih producenata
    void clearScenarists(){ _listOfScenarists.clear();}
    void clearActors(){ _listOfActors.clear();}
+   Film& operator=(const Film &other);
+   Film& operator=(Film &&other);
+   Film(const Film &other);
+   Film(Film &&other);
 
   
 };

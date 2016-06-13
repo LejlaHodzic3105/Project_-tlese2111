@@ -41,41 +41,44 @@ ListUsers& ListUsers::addUser(User& user){
 
 
 void ListUsers::printListUsers()const{
+    if(!empty()){
     auto it=(*this).begin();
     while(it!=(*this).end()){
          std::cout<<(*it).getInfo();
               ++it;
                 
-    }
+    }}
 
 }
 
-User& ListUsers::findUserByName(const std::string& name, const std::string& surname){
+User ListUsers::findUserByName(const std::string& name, const std::string& surname){
+  if(!empty()){
   auto it=(*this).begin();
   while(it!=(*this).end()){
         if((*it).getInfo().getName()==name && (*it).getInfo().getSurname()==surname) return (*it).getInfo();
 	++it;
-  }
+  }}
   throw std::string("Korisnik nije pronadjen!");
 }
 
-User& ListUsers::findUserByUsername(const std::string& username){
+User ListUsers::findUserByUsername(const std::string& username){
+   if(!empty()){
    auto it=(*this).begin();
   while(it!=(*this).end()){
         if((*it).getInfo().getUserAcc().getUsername()==username) return (*it).getInfo();
 	++it;
-  }
+  }}
 
   throw std::string("Korisnik nije pronadjen!");
 }
 
 bool ListUsers::findUserByUsernameBool(const std::string& username){
+  if(empty()) return false;
    auto it=(*this).begin();
   while(it!=(*this).end()){
         if((*it).getInfo().getUserAcc().getUsername()==username) return true;
 	++it;
   }
-
   return false;
 }
 
@@ -92,6 +95,7 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
   if(s2=="") update=findUserByUsername(s1);
   else update=findUserByName(s1,s2);
   std::string choise;
+  std::string stariUsername=update.getUserAcc().getUsername();
   std::cout<<"Da li zelite promijeniti jedinstveni maticni broj? Upisite da ili ne: ";
   std::cin>>choise;
   if(choise=="da")
@@ -111,7 +115,7 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
     std::cout<<"Unesite novo korisnicko ime: "; // korisnicko ime  mora biti jedinstveno
     while(cin>>username)
     {
-      if(findUserByUsernameBool(username))
+      if(!findUserByUsernameBool(username))
       {
         std::cout<<"Unesite novi password; ";
         std::cin>>password;
@@ -123,5 +127,9 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
 
     }
   }
-
+  auto it=(*this).begin();
+  while(it!=(*this).end()){
+  if((*it).getInfo().getUserAcc().getUsername()==stariUsername){ (*it).setInfo(update); break;}
+  ++it;
+  }
 }

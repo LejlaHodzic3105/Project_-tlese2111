@@ -8,40 +8,38 @@ using namespace std;
 
 int main(){
 
-cout <<"semin commit" << endl;
-ListFilms listafilmova;
-cout << "dodajem film:" << endl;
-Film novi_film;
-cout << "unesite naziv: ";
-string naziv;
-getline(cin,naziv);
-novi_film.setTitle(naziv);
-cout << "unesite opis ";
-string opis;
-getline(cin,opis);
-novi_film.setDescription(opis);
-novi_film.setKey(listafilmova.size());
-cout << "Unesite ime i prezime directora: ";
-string ime,prezime;
-cin >> ime >> prezime;
-cin.ignore();
-novi_film.setDirector(ime,prezime);
-cout << "unestie produkcijsku kompaniju: ";
-string kompanije;
-getline(cin,opis);
-novi_film.setCompany(opis);
-cout << "unesite godinu izdavanja: ";
-int god;
-cin >>god;
-novi_film.setYear(god);
-cout << "unesite broj kopija: ";
-cin >> god;
-novi_film.setNumOfCopies(god);
-listafilmova.addFilm(novi_film);
-cout << "unesite koji film zelite da vidite detalje: ";
-string trazi;
-cin>>trazi;
-listafilmova.printAllInfo(trazi);
+ListUsers lista;
+cout << "dodajem usera:" << endl;
+User user;
+cout << "unesite ime: ";
+string ime;
+getline(cin,ime);
+cout << "unesite prezime: ";
+string prezime;
+getline(cin,prezime);
+cout << "Unesite maticni broj: ";
+string broj;
+getline(cin,broj);
+cout << "unestie dan mjesec godinu uclanjivanja ";
+int dan,mjesec,godina;
+cin >> dan >> mjesec >> godina;
+cout << "unesite username: ";
+string username;
+cin >>username;
+cout << "unesite password: ";
+string password;
+cin >> password;
+User novi=User(ime,prezime,broj,dan,mjesec,godina,username,password);
+lista.addUser(novi);
+
+lista.printListUsers();
+cout << "Unesite ime i prezime korisnika za brisanje" << endl;
+string brisi1,brisi2;
+cin >> brisi1;
+lista.removeUser(brisi1);
+lista.printListUsers();
+
+
 //ja promijenio main
 
 return 0;

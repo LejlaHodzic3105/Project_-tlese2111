@@ -34,7 +34,7 @@ void ListFilms::printListFilms()const
   }}
 }
 
-Film& ListFilms::findFilm(const string& film)const{
+Film ListFilms::findFilm(const string& film)const{
   ListFilms foundFilms; //lista pronadjenih filmova moze maksimalno biti duga listi svih filmova
   auto it=(*this).begin();
   while(it!=(*this).end())
@@ -62,7 +62,7 @@ Film& ListFilms::findFilm(const string& film)const{
       auto k=foundFilms.begin();
       while(k!=foundFilms.end())
       {
-       if((*k).getInfo().getKey()==kljuc) return (*k).getInfo();
+       if((*k).getInfo().getKey()==kljuc){ return (*k).getInfo();}
        k++;
 
       }
@@ -76,6 +76,8 @@ void ListFilms::removeFilm(const string& film){
   pop(removeF);
 }
 
+
+
 void ListFilms::updateFilm(const string& film){
   Film update=findFilm(film);
   std::string izbor;
@@ -88,6 +90,7 @@ void ListFilms::updateFilm(const string& film){
     std::cin >> naziv;
     update.setTitle(naziv);
   }
+  cin.ignore();
   std::cout << "Da li zelite da promijenite opis filma. Upisite da ili ne: ";
   std::cin >> izbor;
   if(izbor=="da")
@@ -178,6 +181,13 @@ void ListFilms::updateFilm(const string& film){
       update.setActors(Person(ime,prezime));
     }
   }
+  auto k=(*this).begin();
+  while(k!=(*this).end())
+      {
+       if((*k).getInfo().getKey()==update.getKey()){ (*k).setInfo(update); break;}
+       k++;
+
+      }
 }
 
 void ListFilms::printAllInfo(const string& film)const{
