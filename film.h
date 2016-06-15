@@ -44,7 +44,8 @@ class Film
    void setProducents(const Person &producent){_listOfProducents.push_back(producent);}
    void setScenarists(const Person scenarist){_listOfScenarists.push_back(scenarist);}
    void setActors(const Person actor){_listOfActors.push_back(actor);}
-   void printFilm()const{std::cout<<_title <<" "<< _year<<std::endl;} // pregled sadrzaja videoteke,svi filmovi sortirani po godini 
+   void printFilm()const{std::cout<<"Naziv filma: "<<_title <<std::endl<<"Godina proizvodnje: "<< _year<<std::endl;} // pregled sadrzaja videoteke,svi filmovi sortirani po godini
+   void printInfo()const;
    bool operator==(const Film &film);
    bool operator!=(const Film &film);
    void clearProducents(){ _listOfProducents.clear();} //za azuriranje, kada zeli da promijeni producente, moramo prvo isprazniti listu postojecih producenata

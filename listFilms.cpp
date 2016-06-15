@@ -49,13 +49,15 @@ Film ListFilms::findFilm(const string& film)const{
     else if(foundFilms.size()==1) return foundFilms.front();
     else
     {
-      std::cout<<"Pronadjeno je "<<foundFilms.size()<< " filmova sa imenom "<< film<< ". Molimo unseite jedinstveni kljuc za trazeni film iz liste pronadjenih kljuceva: ";
+      std::cout<<"Pronadjeno je "<<foundFilms.size()<< " filmova sa imenom "<< film<< std::endl;
       auto p=foundFilms.begin();
       while(p!=foundFilms.end())
       {
-        std::cout<< (*p).getInfo().getKey()<< ' ';
+        (*p).getInfo().printInfo();
         p++;
       }
+
+      std::cout<<"Ispisani su vam kljucevi odredjenih filmova, unesite kljuc filma koji zelite: ";
       std::cout<<std::endl;
       int kljuc;
       std::cin>>kljuc;
@@ -207,22 +209,5 @@ void ListFilms::updateFilm(const string& film){
 
 void ListFilms::printAllInfo(const string& film)const{
   Film print=findFilm(film);
-  std::cout<<"Title: "<< print.getTitle()<<std::endl;
-  std::cout<<"Description: "<< print.getDescription()<<std::endl;
-  std::cout<<"Director: ";
-  print.getDirector().printPerson();
-  std::cout<<std::endl;
-  std::cout<<"Production Company: "<< print.getCompany()<<std::endl;
-  std::cout<<"Producents: "<<std::endl;
-  print.getProducents().print();
-  std::cout<<std::endl;
-  std::cout<<"Actors: "<<std::endl;
-  print.getActors().print();
-  std::cout<<std::endl;
-  std::cout<<"Scenarists:"<<std::endl;
-  print.getScenarists().print();
-  std::cout<<std::endl;
-  std::cout<<"Year: "<<print.getYear()<<std::endl;
-  std::cout<<"Number of copies: "<<print.getNumOfCopies()<<std::endl;
-  std::cout<<"Unique key: "<<print.getKey()<<std::endl;
-}
+  print.printInfo();
+ }

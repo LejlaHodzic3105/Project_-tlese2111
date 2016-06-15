@@ -61,9 +61,11 @@ int godina;
 cin>>godina;
 film.setYear(godina);
 filmovi.addFilm(film);
+
 i++;
 }
 filmovi.printListFilms();
+filmovi.printAllInfo("love");
 filmovi.updateFilm("love");
 filmovi.printListFilms();
 
