@@ -94,11 +94,34 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
   User update;
   if(s2=="") update=findUserByUsername(s1);
   else update=findUserByName(s1,s2);
-  std::string choise;
+  int choise;
   std::string stariUsername=update.getUserAcc().getUsername();
-  std::cout<<"Da li zelite promijeniti jedinstveni maticni broj? Upisite da ili ne: ";
+  int a=1;
+  while(a==1)
+  {
+  cout<<" --- Opcije --- "<< std::endl;
+  cout<<"1. Unesite 1 za promjenu imena i prezimena: "<< std::endl;
+  cout<<"2. Unesite 2 za promjenu maticnog broja(JMBG): "<< std::endl;
+  cout<<"3. Unesite 3 za promjenu korisnickog racuna: "<<std::endl;
+  
   std::cin>>choise;
-  if(choise=="da")
+
+  if(choise==1)
+  {
+   
+    std::string name;
+    std::string surname;
+    std::cout<<"Unesite novo ime: ";
+    std::cin>>name;
+    std::cout<<"Unesite novo prezime: ";
+    std::cin>>surname;
+    update.setPerson(name,surname);
+
+
+  }
+  
+  
+  else if(choise==2)
   {
     std::cout<<"Unesite novi JMBG: ";
     std::string unob;
@@ -106,9 +129,8 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
     update.setUnob(unob);
 
   }
-  std::cout<<"Da li zelite promijeniti korisnicki racun? Upisite da ili ne: ";
-  std::cin>>choise;
-  if(choise=="da")
+
+  else if(choise==3)
   {
     std::string username;
     std::string password;
@@ -126,6 +148,16 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
         cout<<"Korisnicko ime je zauzeto,unesite novo: "<<std::endl;
 
     }
+  }
+  else
+  {
+    cout<<"Unijeli ste pogresan broj "<< std::endl;
+  }
+  std::cout<<"Ako zelite promijeniti jos nesto upisite 1,u suprotnom 0: "<< std::endl;
+  int x;
+  cin>>x;
+  if(x!=1)
+    a=0;
   }
   auto it=(*this).begin();
   while(it!=(*this).end()){

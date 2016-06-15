@@ -1,6 +1,7 @@
 #ifndef _USER_H
 #define _USER_H
 
+#include<ctime>
 #include <iostream>
 #include "person.h"
 #include "date.h"
@@ -23,7 +24,7 @@ class User: public Person
 
   public:
   User(){_nobf=0;}
-  User(const std::string& name,const std::string& surname,const std::string& unob,int year,int month,int day,const std::string& username,const std::string& password):Person(name,surname){_date.setDate(year,month,day); _unob=unob;_useracc.setUserAccount(username,password);}
+  User(const std::string& name,const std::string& surname,const std::string& unob,const std::string& username,const std::string& password);// datum se uzima automatski sa racunara
   ~User()=default;
   const std::string getUnob()const{return _unob;}
   const Date& getDate() const{return _date;}

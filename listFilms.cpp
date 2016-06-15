@@ -80,6 +80,7 @@ void ListFilms::removeFilm(const string& film){
 
 void ListFilms::updateFilm(const string& film){
   Film update=findFilm(film);
+  int year=update.getYear();
   std::string izbor;
   std::cout << "Da li zelite da promijenite naziv filma. Upisite da ili ne: ";
   std::cin >> izbor;
@@ -187,6 +188,12 @@ void ListFilms::updateFilm(const string& film){
        if((*k).getInfo().getKey()==update.getKey()){ (*k).setInfo(update); break;}
        k++;
 
+      }
+      if(year!=update.getYear()) // ukoliko je bila azurirana godina izdavanja, u skladu sa tim se mora izvrsiti i ponovno sortiranje,odnosno pozicioniranje filma u odnosu na navu godinu
+      {
+      Film temp=update; 
+      removeFilm(update.getTitle());
+      addFilm(temp);
       }
 }
 

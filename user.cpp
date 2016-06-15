@@ -9,6 +9,15 @@ std::ostream& operator<<(std::ostream& out, const User& user)
   return out;
 }
 
+User::User(const std::string& name,const std::string& surname,const std::string& unob,const std::string& username,const std::string& password):Person(name,surname)
+{   int year,month,day;
+    time_t t = time(0);
+    struct tm * now = localtime( & t );
+    _date.setDate((now->tm_year + 1900),(now->tm_mon + 1),now->tm_mday);
+    _unob=unob;
+    _useracc.setUserAccount(username,password);
+}
+
 void User::borrowFilm(Film& film){
   if(film.getNumOfCopies()==0) cout<<"Film trenutno nije dostupan!"<<std::endl;
   else if(_nobf==3) cout << "Mozete posuditi maksimalno tri filma. Molimo pokusajte ponovo nakon sto vratite neki od filmova." << std::endl;
