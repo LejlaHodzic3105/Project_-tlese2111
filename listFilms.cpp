@@ -81,65 +81,67 @@ void ListFilms::removeFilm(const string& film){
 void ListFilms::updateFilm(const string& film){
   Film update=findFilm(film);
   int year=update.getYear();
-  std::string izbor;
-  std::cout << "Da li zelite da promijenite naziv filma. Upisite da ili ne: ";
+  int izbor;
+  int a=1;
+  while(a==1)
+  {
+  std::cout<< " ---- Opcije ---- " << std::endl;
+  std::cout<< "1. Unesite 1 za promjenu naziva filma "<<std::endl;
+  std::cout<< "2. Unesite 2 za promjenu opisa filma "<<std::endl;
+  std::cout<< "3. Unesite 3 za promjenu liste rezisera filma "<<std::endl;
+  std::cout<< "4. Unesite 4 za promjenu produkcijske kompanije filma "<<std::endl;
+  std::cout<< "5. Unesite 5 za promjenu godine izdavanja filma "<< std::endl;
+  std::cout<< "6. Unesite 6 za promjenu broja kopija filma "<<std::endl;
+  std::cout<< "7. Unesite 7 za promjenu liste producenata filma "<<std::endl;
+  std::cout<< "8. Unesite 8 za promjenu liste scenarista filma "<<std::endl;
+  std::cout<< "9. Unesite 9 za promjenu liste glumaca filma "<<std::endl;
+
   std::cin >> izbor;
-  if(izbor=="da")
+  if(izbor==1)
   {
     std::cout << "Unesite novi naziv filma: ";
     std::string naziv;
     std::cin >> naziv;
     update.setTitle(naziv);
   }
-  cin.ignore();
-  std::cout << "Da li zelite da promijenite opis filma. Upisite da ili ne: ";
-  std::cin >> izbor;
-  if(izbor=="da")
+  //cin.ignore();
+  else if(izbor==2)
   {
     std::cout << "Unesite novi opis filma: ";
     std::string opis;
     std::cin >> opis;
     update.setDescription(opis);
   }
-  std::cout << "Da li zelite da promijenite rezisera filma. Upisite da ili ne: ";
-  std::cin >> izbor;
-  if(izbor=="da")
+  else if(izbor==3)
   {
     std::cout << "Unesite novo ime i prezime rezisera filma: ";
     std::string ime,prezime;
     std::cin >> ime >> prezime;
     update.setDirector(ime,prezime);
   }
-  std::cout << "Da li zelite da promijenite produkcijsku kompaniju filma. Upisite da ili ne: ";
-  std::cin >> izbor;
-  if(izbor=="da")
+  
+  else if(izbor==4)
   {
     std::cout << "Unesite novu produkcijsku kompaniju filma: ";
     std::string kompanija;
     std::cin >> kompanija;
     update.setCompany(kompanija);
   }
-  std::cout << "Da li zelite da promijenite godinu izdavanja filma. Upisite da ili ne: ";
-  std::cin >> izbor;
-  if(izbor=="da")
+  else if(izbor==5)
   {
     std::cout << "Unesite novu godinu izdavanja filma: ";
     int godina;
     std::cin >> godina;
     update.setYear(godina);
   }
-  std::cout << "Da li zelite da promijenite broj kopija filma. Upisite da ili ne: ";
-  std::cin >> izbor;
-  if(izbor=="da")
+  else if(izbor==6)
   {
     std::cout << "Unesite novi broj kopija filma: ";
     int broj_kopija;
     std::cin >> broj_kopija;
     update.setNumOfCopies(broj_kopija);
   }
-  std::cout << "Da li zelite da promijenite listu producenata filma. Upisite da ili ne: ";
-  std::cin >> izbor;
-  if(izbor=="da")
+  else if(izbor==7)
   { update.clearProducents();
     std::cout << "Koliko producenata cete unijeti: ";
     int broj;
@@ -152,9 +154,7 @@ void ListFilms::updateFilm(const string& film){
       update.setProducents(Person(ime,prezime));
     }
   }
-  std::cout << "Da li zelite da promijenite listu scenarista filma. Upisite da ili ne: ";
-  std::cin >> izbor;
-  if(izbor=="da")
+  else if(izbor==8)
   { update.clearScenarists();
     std::cout << "Koliko scenarista cete unijeti: ";
     int broj;
@@ -167,9 +167,7 @@ void ListFilms::updateFilm(const string& film){
       update.setScenarists(Person(ime,prezime));
     }
   }
-  std::cout << "Da li zelite da promijenite listu glumaca filma. Upisite da ili ne: ";
-  std::cin >> izbor;
-  if(izbor=="da")
+  else if(izbor==9)
   { update.clearActors();
     std::cout << "Koliko glumaca cete unijeti: ";
     int broj;
@@ -182,6 +180,16 @@ void ListFilms::updateFilm(const string& film){
       update.setActors(Person(ime,prezime));
     }
   }
+  else
+  {
+    std::cout<<" Unijeli se pogresan broj! "<<std::endl;
+  }
+  std::cout<<" Ukoliko zelite izvrsiti jos neke izmjene unesite 1,u suprotnom 0: "<<std::endl;
+  int x;
+  cin>>x;
+  if(x!=1)
+    a=0;
+  }
   auto k=(*this).begin();
   while(k!=(*this).end())
       {
@@ -189,7 +197,7 @@ void ListFilms::updateFilm(const string& film){
        k++;
 
       }
-      if(year!=update.getYear()) // ukoliko je bila azurirana godina izdavanja, u skladu sa tim se mora izvrsiti i ponovno sortiranje,odnosno pozicioniranje filma u odnosu na navu godinu
+      if(year!=update.getYear()) // ukoliko je bila azurirana godina izdavanja, u skladu sa tim se mora izvrsiti i ponovno sortiranje,odnosno pozicioniranje filma u odnosu na novu godinu
       {
       Film temp=update; 
       removeFilm(update.getTitle());

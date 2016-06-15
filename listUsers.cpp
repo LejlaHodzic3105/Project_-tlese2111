@@ -100,9 +100,9 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
   while(a==1)
   {
   cout<<" --- Opcije --- "<< std::endl;
-  cout<<"1. Unesite 1 za promjenu imena i prezimena: "<< std::endl;
-  cout<<"2. Unesite 2 za promjenu maticnog broja(JMBG): "<< std::endl;
-  cout<<"3. Unesite 3 za promjenu korisnickog racuna: "<<std::endl;
+  cout<<"1. Unesite 1 za promjenu imena i prezimena "<< std::endl;
+  cout<<"2. Unesite 2 za promjenu maticnog broja(JMBG) "<< std::endl;
+  cout<<"3. Unesite 3 za promjenu korisnickog racuna "<<std::endl;
   
   std::cin>>choise;
 
