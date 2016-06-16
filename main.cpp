@@ -3,12 +3,16 @@
 #include"administrator.h"
 #include"listFilms.h"
 #include"listUsers.h"
+#include "readUsers.h"
 
 using namespace std;
 
 int main(){
 
 ListUsers lista;
+readUsers("users.txt",lista);
+lista.printListUsers();
+
 
 cout << "dodajem usera:" << endl;
 User user;
