@@ -1,4 +1,5 @@
 #include "user.h"
+#include "checkstring.h"
 
 std::ostream& operator<<(std::ostream& out, const User& user)
 {
@@ -9,12 +10,30 @@ std::ostream& operator<<(std::ostream& out, const User& user)
   return out;
 }
 
-User::User(const std::string& name,const std::string& surname,const std::string& unob,const std::string& username,const std::string& password):Person(name,surname)
+bool check_string_all_digits(const string &a);
+
+bool check_string_for_spaces(const string &a);
+
+User::User(const std::string& name,const std::string& surname,std::string& unob,std::string& username,std::string& password):Person(name,surname)
 {   int year,month,day;
     time_t t = time(0);
     struct tm * now = localtime( & t );
     _date.setDate((now->tm_year + 1900),(now->tm_mon + 1),now->tm_mday);
+    while(unob.size()!=13 || !check_string_all_digits(unob))
+    {   std::cout << "Jedistveni maticni broj se mora sastojati iskljucivo od 13 cifara, molimo unesite ga ponovo: ";
+	getline(std::cin,unob);
+    }
     _unob=unob;
+    while(check_string_for_spaces(username))
+    {
+	std::cout << "Username ne smije sadrzavati prazno mjesto, molimo unesite novi username: ";
+	getline(std::cin,username);
+    }
+    while(check_string_for_spaces(password))
+    {
+	std::cout << "Password ne smije sadrzavati prazno mjesto, molimo unesite novi password: ";
+	getline(std::cin,password);
+    }
     _useracc.setUserAccount(username,password);
 }
 

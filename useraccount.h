@@ -16,6 +16,7 @@ class UserAccount{
   const std::string& getUsername(){return _username;}
   void setUserAccount(std::string username, std::string password){_username=username; _password=password;}
   std::string getUsername()const{return _username;}
+  void setUsername(const std::string &username){_username=username;}
 
 };
 

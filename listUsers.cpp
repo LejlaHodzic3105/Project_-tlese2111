@@ -1,8 +1,19 @@
 #include "listUsers.h"
+#include "checkstring.h"
 
 ListUsers& ListUsers::addUser(User& user){
-  if(!(findUserByUsernameBool(user.getUserAcc().getUsername())))
+  while(findUserByUsernameBool(user.getUserAcc().getUsername()))
   {
+    std::cout << "Korisnik sa tim korisnickim imenom vec postoji, molimo unesite novo: ";
+    std::string username;
+    getline(std::cin,username);
+    while(check_string_for_spaces(username))
+      {
+	std::cout << "Username ne smije sadrzavati prazno mjesto, molimo unesite novi username: ";
+	getline(std::cin,username);
+      }
+    user.getUserAcc().setUsername(username);
+  }
   if(empty()){
     push_back(user);
 
@@ -35,7 +46,7 @@ ListUsers& ListUsers::addUser(User& user){
       ++it;
     }
     push_back(user);
-  }}
+  }
   return *this;
 }
 
@@ -125,7 +136,12 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
   {
     std::cout<<"Unesite novi JMBG: ";
     std::string unob;
-    cin>>unob;
+    cin.ignore();
+    getline(std::cin,unob);
+    while(unob.size()!=13 || !check_string_all_digits(unob))
+    {   std::cout << "Jedistveni maticni broj se mora sastojati iskljucivo od 13 cifara, molimo unesite ga ponovo: ";
+	getline(std::cin,unob);
+    }
     update.setUnob(unob);
 
   }
@@ -135,12 +151,23 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
     std::string username;
     std::string password;
     std::cout<<"Unesite novo korisnicko ime: "; // korisnicko ime  mora biti jedinstveno
-    while(cin>>username)
-    {
+    cin.ignore();
+    while(getline(std::cin,username))
+    { 
+      while(check_string_for_spaces(username))
+      {
+	std::cout << "Username ne smije sadrzavati prazno mjesto, molimo unesite novi username: ";
+	getline(std::cin,username);
+      }
       if(!findUserByUsernameBool(username))
       {
         std::cout<<"Unesite novi password; ";
-        std::cin>>password;
+        getline(std::cin,password);
+	while(check_string_for_spaces(password))
+        {
+	  std::cout << "Password ne smije sadrzavati prazno mjesto, molimo unesite novi password: ";
+	  getline(std::cin,password);
+        }
         update.setAccount(username,password); 
         break;
       }
