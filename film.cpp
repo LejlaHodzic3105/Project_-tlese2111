@@ -72,6 +72,16 @@ Film::Film(Film &&other){
 
 }
 
+void Film::setFilm(const std::string title,int year,const std::string nameD,const std::string surnameD,const std::string prodC,int key,int num)
+{
+  _title=title;
+  _year=year;
+  (*this).setDirector(nameD,surnameD);
+  _productionCompany=prodC;
+  _key=key;
+  _numOfCopies=num;
+}
+
 void Film::printInfo() const
 {
   std::cout<<"Title: "<< _title<<std::endl;
