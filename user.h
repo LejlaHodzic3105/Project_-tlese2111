@@ -26,6 +26,7 @@ class User: public Person
   User(){_nobf=0;}
   User(const std::string& name,const std::string& surname,const std::string& unob,const std::string& username,const std::string& password);// datum se uzima automatski sa racunara
   ~User()=default;
+  User& setUser(const std::string& name,const std::string& surname,const std::string& unob,const std::string& username,const std::string& password,int day,int month,int year,int nobf);
   const std::string getUnob()const{return _unob;}
   const Date& getDate() const{return _date;}
   UserAccount& getUserAcc(){ return _useracc;}

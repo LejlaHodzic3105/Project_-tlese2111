@@ -2,7 +2,7 @@
 
 
 
-void readFile(std::string file,ListUsers& myList){
+void readUsers(std::string file,ListUsers& myList){
   std::string line;
   User newUser;
   int br=0;
@@ -11,7 +11,7 @@ void readFile(std::string file,ListUsers& myList){
   if(nameFileout.is_open()){
     char dummy;
     std::string name,surname,username,password,unob;
-    int year,month,day;
+    int year,month,day,nobf;
     while(getline(nameFileout,line))
     { 
       std::stringstream ss(line);
@@ -23,8 +23,8 @@ void readFile(std::string file,ListUsers& myList){
       myList.addUser(newUser);
       }
 
-        ss>>name>> surname>> username>> password>> unob>> day>> dummy>> month>>dummy>>year;
-        newUser.setUser(name,surname,unob,username,password,day,month,year);
+        ss>>name>> surname>> username>> password>> unob>> day>> dummy>> month>>dummy>>year>>nobf;
+        newUser.setUser(name,surname,unob,username,password,day,month,year,nobf);
         //newBill.getProducts().clear();
         br++;
 
@@ -42,6 +42,7 @@ void readFile(std::string file,ListUsers& myList){
 
 
     }
+    if(br!=0)
     myList.addUser(newUser); 
 
   }

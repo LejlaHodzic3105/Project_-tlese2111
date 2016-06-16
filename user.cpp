@@ -18,6 +18,18 @@ User::User(const std::string& name,const std::string& surname,const std::string&
     _useracc.setUserAccount(username,password);
 }
 
+
+User& User::setUser(const std::string& name,const std::string& surname,const std::string& unob,const std::string& username,const std::string& password,int day,int month,int year,int nobf)
+{
+  _date.setDate(year,month,day);
+  _unob=unob;
+  _nobf=nobf;
+  _useracc.setUserAccount(username,password);
+  (*this).setPerson(name,surname);
+  
+  return *this;
+}
+
 void User::borrowFilm(Film& film){
   if(film.getNumOfCopies()==0) cout<<"Film trenutno nije dostupan!"<<std::endl;
   else if(_nobf==3) cout << "Mozete posuditi maksimalno tri filma. Molimo pokusajte ponovo nakon sto vratite neki od filmova." << std::endl;
