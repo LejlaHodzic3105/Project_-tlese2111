@@ -1,11 +1,12 @@
 #include "writeFilms.h"
 
-void writeInFile(ListFilms& films,std::string file,int key)
+void writeInFile(ListFilms& films,std::string file,int key,int hist)
 {
 ListFilms::iterator it=films.begin();
            ListFilms::iterator iter=films.end();
            ofstream logging;
            logging.open(file);
+           if(hist!=0)
            logging<<"&"<<key<<std::endl;
            while(it!=iter){
              
@@ -31,7 +32,7 @@ ListFilms::iterator it=films.begin();
             k=nF.getScenarists().end();
             logging<<"%";
           while(p!=k){
-            logging<<(*p).getInfo().getName()<<","<<(*p).getInfo().getSurname()<<",";
+            logging<<(*p).getInfo().getName()<<","<<(*p).getInfo().getSurname();
             ++p;
             if(p!=k)
               logging<<",";
@@ -42,7 +43,7 @@ ListFilms::iterator it=films.begin();
             k=nF.getActors().end();
             logging<<"/";
           while(p!=k){
-            logging<<(*p).getInfo().getName()<<","<<(*p).getInfo().getSurname()<<",";
+            logging<<(*p).getInfo().getName()<<","<<(*p).getInfo().getSurname();
             ++p;
             if(p!=k)
               logging<<",";

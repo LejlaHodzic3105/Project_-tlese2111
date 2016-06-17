@@ -1,4 +1,4 @@
-OBJS= date.o film.o listFilms.o listUsers.o main.o person.o user.o readUsers.o split.o readFilms.o checkstring.o options.o writeFilms.o
+OBJS= date.o film.o listFilms.o listUsers.o main.o person.o user.o readUsers.o split.o readFilms.o checkstring.o options.o writeFilms.o writeUsers.o
 CC= clang++
 CFLAGS = -std=c++11 -c
 LFLAGS = -std=c++11
@@ -27,10 +27,12 @@ readFilms.o: readFilms.cpp readFilms.h
 	$(CC) $(CFLAGS) readFilms.cpp
 checkstring.o: checkstring.cpp checkstring.h
 	$(CC) $(CFLAGS) checkstring.cpp
-options.o: options.cpp options.h writeFilms.h
+options.o: options.cpp options.h writeFilms.h writeUsers.h
 	$(CC) $(CFLAGS) options.cpp
 writeFilms.o: writeFilms.cpp writeFilms.h
 	$(CC) $(CFLAGS) writeFilms.cpp
+writeUsers.o: writeUsers.cpp writeUsers.h
+	$(CC) $(CFLAGS) writeUsers.cpp
 
 clean:
 	\rm *.o *~ p1

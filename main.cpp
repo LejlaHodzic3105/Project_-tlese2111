@@ -5,6 +5,7 @@
 #include "readUsers.h"
 #include "readFilms.h"
 #include "options.h"
+#include<unistd.h>
 
 using namespace std;
 
@@ -27,26 +28,22 @@ while(!listU.findUserByUsernameBool(username) && username!=admin.getUserAcc().ge
      getline(cin,username);
   }
 if(username==admin.getUserAcc().getUsername())
-{ cout << "Please enter your password: ";
-  getline(cin,password);
+{ password=getpass("Enter Administrator Password: "); 
   while(password!=admin.getUserAcc().getPassword()){
-  cout << "Username " << username << " and password " << password << " do not match. Please enter a new password: ";
-  getline(cin,password);
+  password=getpass("Username and password do not match.Enter Administrator Password: "); 
   }
   cout << admin.getName() << ", welcome to videostore Mind Games!" << endl;
-  optionsAdmin(listF,listU,key);
+  optionsAdmin(listF,listU,key,admin);
 }
 else
-{ cout << "Please enter your password: ";
-  getline(cin,password);
+{ password=getpass("Enter user account Password: "); 
   User newuser=listU.findUserByUsername(username);
   while(newuser.getUserAcc().getPassword()!=password)
   {
-     cout << "Username " << username << " and password " << password << " do not match. Please enter a new password: ";
-     getline(cin,password);
+     password=getpass("Username and password do not match.Enter user account Password: "); 
   }
   cout << newuser.getName() << ", welcome to videostore Mind Games!" << endl;
-  optionsUser(listF,listU,listH,newuser);
+  optionsUser(listF,listU,listH,newuser,admin,key);
 }
 return 0;
 }

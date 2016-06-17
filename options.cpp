@@ -1,6 +1,7 @@
 #include "options.h"
 #include "writeFilms.h"
-void optionsAdmin(ListFilms &listF,ListUsers &listU,int &key){
+#include "writeUsers.h"
+void optionsAdmin(ListFilms &listF,ListUsers &listU,int &key,Administrator &admin){
 int choice;
 
 while(true)
@@ -245,7 +246,8 @@ listU.findUserByName(s1,s2).printHistory();
 }
 
 else if(choice==14){
-writeInFile(listF,"films.txt",key);
+writeInFile(listF,"films.txt",key,1);
+writeUsers(listU,"users.txt",admin);
 return;
 }
 else std::cout << "Wrong input!" << std::endl;
@@ -253,7 +255,7 @@ else std::cout << "Wrong input!" << std::endl;
 }
 }
 
-void optionsUser(ListFilms &listF,ListUsers &listU,ListFilms &listH,User& newuser){
+void optionsUser(ListFilms &listF,ListUsers &listU,ListFilms &listH,User& newuser,Administrator &admin,int key){
 int choice;
 
 while(true)
@@ -346,8 +348,12 @@ else if(choice==7){
 newuser.printBorrowedFilms();
 }
 else if(choice==8){
+writeUsers(listU,"users.txt",admin);
+writeInFile(listF,"films.txt",key,1);
+writeInFile(listH,"history.txt",key);
 return;
 }
 else std::cout << "Wrong input!" << std::endl;
 }
+
 }
