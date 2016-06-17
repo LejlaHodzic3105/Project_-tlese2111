@@ -18,7 +18,7 @@ class User: public Person
   UserAccount _useracc;
   list<Film> _history;
   list<Film> _borrowedFilms;
-  int _nobf; //number of borrowd films
+  int _nobf; //number of borrowed films
 
   
 
@@ -47,6 +47,7 @@ class User: public Person
   bool operator==(const User& user);
   void printUser()const;
   bool operator!=(const User& user);
+  bool isBorrowed(const Film& film)const;
 };
 
 

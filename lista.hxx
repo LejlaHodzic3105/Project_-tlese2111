@@ -534,11 +534,14 @@ nodeType<Type> *temp;
   last=nullptr;
   count=0;
   }
-  else if(temp->getInfo()==val){first=first->getNext(); count--; delete temp;}
-  else{while(temp->getNext()->getInfo()!=val){temp=temp->getNext();}
+  else if(first->getNext()!=nullptr && temp->getInfo()==val){first=first->getNext(); count--; delete temp;}
+  else{
+  while(temp->getNext()->getInfo()!=val){temp=temp->getNext();}
+  nodeType<Type> *del;
+  del=temp->getNext();
   temp->setNext(temp->getNext()->getNext());
   if(temp->getNext()==nullptr) last=temp;
-  delete temp->getNext();
+  delete del;
   count--;
  }
 }

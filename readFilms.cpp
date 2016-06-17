@@ -110,7 +110,7 @@ int readFilms(std::string file,ListFilms& myList){
 
   else
   {
-    std::cout<< "File don't exist!"<<std::endl; 
+    std::cout<< "File doesn't exist!"<<std::endl; 
 
   }
   nameFileout.close();

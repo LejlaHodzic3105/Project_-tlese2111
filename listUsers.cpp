@@ -4,12 +4,12 @@
 ListUsers& ListUsers::addUser(User& user){
   while(findUserByUsernameBool(user.getUserAcc().getUsername()))
   {
-    std::cout << "Korisnik sa tim korisnickim imenom vec postoji, molimo unesite novo: ";
+    std::cout << "Username " << user.getUserAcc().getUsername() << " is already taken by another user. Please enter a different one: ";
     std::string username;
     getline(std::cin,username);
     while(check_string_for_spaces(username))
       {
-	std::cout << "Username ne smije sadrzavati prazno mjesto, molimo unesite novi username: ";
+	std::cout << "Username can't contain blank spaces. Please enter a new one: ";
 	getline(std::cin,username);
       }
     user.getUserAcc().setUsername(username);
@@ -78,7 +78,7 @@ User ListUsers::findUserByName(const std::string& name, const std::string& surna
         if((*it).getInfo().getName()==name && (*it).getInfo().getSurname()==surname) return (*it).getInfo();
 	++it;
   }}
-  throw std::string("Korisnik nije pronadjen!");
+  throw std::string("User not found!");
 }
 
 User ListUsers::findUserByUsername(const std::string& username){
@@ -89,7 +89,7 @@ User ListUsers::findUserByUsername(const std::string& username){
 	++it;
   }}
 
-  throw std::string("Korisnik nije pronadjen!");
+  throw std::string("User not found!");
 }
 
 bool ListUsers::findUserByUsernameBool(const std::string& username){
@@ -104,25 +104,26 @@ bool ListUsers::findUserByUsernameBool(const std::string& username){
 
 void ListUsers::removeUser(const std::string &s1, const std::string &s2){
   User remove;
-  if(s2=="") remove=findUserByUsername(s1);
+  try{if(s2=="") remove=findUserByUsername(s1);
   else remove=findUserByName(s1,s2);
-  pop(remove);
+  pop(remove);}
+  catch(std::string a){std::cout << a << std::endl;}
 }
 
 void ListUsers::updateUser(const std::string &s1,const std::string &s2)
 {
   User update;
-  if(s2=="") update=findUserByUsername(s1);
+  try{if(s2=="") update=findUserByUsername(s1);
   else update=findUserByName(s1,s2);
   int choise;
   std::string stariUsername=update.getUserAcc().getUsername();
   int a=1;
   while(a==1)
   {
-  cout<<" --- Opcije --- "<< std::endl;
-  cout<<"1. Unesite 1 za promjenu imena i prezimena "<< std::endl;
-  cout<<"2. Unesite 2 za promjenu maticnog broja(JMBG) "<< std::endl;
-  cout<<"3. Unesite 3 za promjenu korisnickog racuna "<<std::endl;
+  cout<<" --- Options --- "<< std::endl;
+  cout<<"1. Enter 1 to change name and surname "<< std::endl;
+  cout<<"2. Enter 2 to change unique number of birth "<< std::endl;
+  cout<<"3. Enter 3 to change user account settings(username and password) "<<std::endl;
   
   std::cin>>choise;
 
@@ -131,9 +132,9 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
    
     std::string name;
     std::string surname;
-    std::cout<<"Unesite novo ime: ";
+    std::cout<<"Enter a new name: ";
     std::cin>>name;
-    std::cout<<"Unesite novo prezime: ";
+    std::cout<<"Enter a new surname: ";
     std::cin>>surname;
     update.setPerson(name,surname);
 
@@ -143,12 +144,12 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
   
   else if(choise==2)
   {
-    std::cout<<"Unesite novi JMBG: ";
+    std::cout<<"Enter a new unique number of birth: ";
     std::string unob;
     cin.ignore();
     getline(std::cin,unob);
     while(unob.size()!=13 || !check_string_all_digits(unob))
-    {   std::cout << "Jedistveni maticni broj se mora sastojati iskljucivo od 13 cifara, molimo unesite ga ponovo: ";
+    {   std::cout << "Unique number of birth must contain exactly 13 digits. Please enter it correctly: ";
 	getline(std::cin,unob);
     }
     update.setUnob(unob);
@@ -159,37 +160,37 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
   {
     std::string username;
     std::string password;
-    std::cout<<"Unesite novo korisnicko ime: "; // korisnicko ime  mora biti jedinstveno
+    std::cout<<"Enter a new username: "; // korisnicko ime  mora biti jedinstveno
     cin.ignore();
     while(getline(std::cin,username))
     { 
       while(check_string_for_spaces(username))
       {
-	std::cout << "Username ne smije sadrzavati prazno mjesto, molimo unesite novi username: ";
+	std::cout << "Username can't contain blank spaces. Please enter a new one: ";
 	getline(std::cin,username);
       }
       if(!findUserByUsernameBool(username))
       {
-        std::cout<<"Unesite novi password; ";
+        std::cout<<"Enter a new password: ";
         getline(std::cin,password);
 	while(check_string_for_spaces(password))
         {
-	  std::cout << "Password ne smije sadrzavati prazno mjesto, molimo unesite novi password: ";
+	  std::cout << "Password can't contain blank spaces. Please enter a new one: ";
 	  getline(std::cin,password);
         }
         update.setAccount(username,password); 
         break;
       }
       else
-        cout<<"Korisnicko ime je zauzeto,unesite novo: "<<std::endl;
+        std::cout<< "Username " << username << " is already taken by another user. Please enter a different one: ";
 
     }
   }
   else
   {
-    cout<<"Unijeli ste pogresan broj "<< std::endl;
+    cout<<"Wrong input!"<< std::endl;
   }
-  std::cout<<"Ako zelite promijeniti jos nesto upisite 1,u suprotnom 0: "<< std::endl;
+  std::cout<<"If you want more changes enter 1, otherwise enter 0: "<< std::endl;
   int x;
   cin>>x;
   if(x!=1)
@@ -199,5 +200,6 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2)
   while(it!=(*this).end()){
   if((*it).getInfo().getUserAcc().getUsername()==stariUsername){ (*it).setInfo(update); break;}
   ++it;
-  }
+  }}
+  catch(std::string a){std::cout << a << std::endl;}
 }

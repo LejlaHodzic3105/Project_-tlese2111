@@ -96,10 +96,10 @@ void Film::printInfo() const
   std::cout<<"Actors: "<<std::endl;
   _listOfActors.print();
   std::cout<<std::endl;
-  std::cout<<"Scenarists:"<<std::endl;
+  std::cout<<"Screenwriters:"<<std::endl;
   _listOfScenarists.print();
   std::cout<<std::endl;
-  std::cout<<"Year: "<<_year<<std::endl;
+  std::cout<<"Year of release: "<<_year<<std::endl;
   std::cout<<"Number of copies: "<<_numOfCopies<<std::endl;
   std::cout<<"Unique key: "<<_key<<std::endl;
 

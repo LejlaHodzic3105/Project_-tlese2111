@@ -11,6 +11,7 @@ class ListFilms :public list<Film>{
     ListFilms(){};
     ListFilms& addFilm(Film&); // dodaje korisnika u listu,i sortira, O(n)
     void printListFilms()const;// ispisuje sve filmove iz liste, njihovu naziv i godinu proizvodnje
+    void printListFilmsByTitle(std::string t)const;
     Film findFilm(const string& film,int key=-1)const;
     void removeFilm(const string& film);
     void updateFilm(const string& film);
