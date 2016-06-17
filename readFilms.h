@@ -11,6 +11,6 @@
 #include <string>
 #include <fstream>
 
-void readFilms(std::string,ListFilms&); // funkcija za citanje fajla filmova
+int readFilms(std::string,ListFilms&); // funkcija za citanje fajla filmova
 
 #endif

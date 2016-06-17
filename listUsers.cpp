@@ -25,6 +25,15 @@ ListUsers& ListUsers::addUser(User& user){
       int day=(*it).getInfo().getDate().getDay();
       int month=(*it).getInfo().getDate().getMonth();
       int year=(*it).getInfo().getDate().getYear();
+      if(user.getDate().getYear()==year && user.getDate().getMonth()==month && user.getDate().getDay()<day){
+        insertBack(it,user);
+        return *this;
+      }
+       if(user.getDate().getYear()==year && user.getDate().getMonth()<month){
+        insertBack(it,user);
+        return *this;
+      }
+
 
 
       if(user.getDate().getYear()>=year){

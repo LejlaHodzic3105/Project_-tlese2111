@@ -1,4 +1,3 @@
-&3
 #Notebook,2004,Nick,Cassavetes,New Line Cinema,1,5
 *A poor and passionate young man falls in love with a rich young woman and gives her a sense of freedom.They soon are separated by their social  differences.
 $Erik,Holmberg,Todd,Lewis,Rick,Reynolds,Bernard,Vincent
@@ -9,7 +8,3 @@ $Erik,Holmberg,Todd,Lewis,Rick,Reynolds,Bernard,Vincent
 $Jayne,Armstrong,Christa,Vausbinder,Dara,Weintraub
 %Nicholas,Sparks,Jeff,Wie
 /Miley,Cyrus,Liam,Hemsworth,Greg,Kinear
-
-
-
-

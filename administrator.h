@@ -12,6 +12,7 @@ class Administrator: public Person
   public:
   Administrator():Person("William","Watson"){_useracc.setUserAccount("William_W","newPasscode");}
   ~Administrator()=default;
+  void setAdmin(const std::string& name,const std::string& surname,const std::string& username,const std::string& password){(*this).setPerson(name,surname),(*this)._useracc.setUserAccount(username,password);}
 
 };
 

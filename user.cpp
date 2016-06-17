@@ -10,6 +10,17 @@ std::ostream& operator<<(std::ostream& out, const User& user)
   return out;
 }
 
+void User::printUser() const
+{
+  (*this).printPerson();
+  std::cout<<" "<< _unob<<" "<< _nobf<< " ";
+  (*this).getDate().printDate();
+  (*this).printHistory();
+  (*this).printBorrowedFilms();
+
+
+}
+
 bool check_string_all_digits(const string &a);
 
 bool check_string_for_spaces(const string &a);
@@ -20,18 +31,18 @@ User::User(const std::string& name,const std::string& surname,std::string& unob,
     struct tm * now = localtime( & t );
     _date.setDate((now->tm_year + 1900),(now->tm_mon + 1),now->tm_mday);
     while(unob.size()!=13 || !check_string_all_digits(unob))
-    {   std::cout << "Jedistveni maticni broj se mora sastojati iskljucivo od 13 cifara, molimo unesite ga ponovo: ";
+    {   std::cout << "Uniqe number of birth must have 13 digits, please enter a new: ";
 	getline(std::cin,unob);
     }
     _unob=unob;
     while(check_string_for_spaces(username))
     {
-	std::cout << "Username ne smije sadrzavati prazno mjesto, molimo unesite novi username: ";
+	std::cout << "Username can not contain spaces,please enter a new one: ";
 	getline(std::cin,username);
     }
     while(check_string_for_spaces(password))
     {
-	std::cout << "Password ne smije sadrzavati prazno mjesto, molimo unesite novi password: ";
+	std::cout << "Password can not contain spaces, please enter a new one: ";
 	getline(std::cin,password);
     }
     _useracc.setUserAccount(username,password);
@@ -50,8 +61,8 @@ User& User::setUser(const std::string& name,const std::string& surname,const std
 }
 
 void User::borrowFilm(Film& film){
-  if(film.getNumOfCopies()==0) cout<<"Film trenutno nije dostupan!"<<std::endl;
-  else if(_nobf==3) cout << "Mozete posuditi maksimalno tri filma. Molimo pokusajte ponovo nakon sto vratite neki od filmova." << std::endl;
+  if(film.getNumOfCopies()==0) cout<<"Film is not available!"<<std::endl;
+  else if(_nobf==3) cout << "You can borrow only 3 films. First return one of films." << std::endl;
   else{
   _nobf++;
   _borrowedFilms.push_back(film);
@@ -65,10 +76,11 @@ void User::returnFilm(Film& film){
   _nobf--;
   film.setNumOfCopies(film.getNumOfCopies()+1);
   _borrowedFilms.pop(film);
-  cout << "Uspjesno ste vratili film." << endl;
+  cout << "You have successfully returned film." << endl;
 }
 
-void User::printHistory(){
+void User::printHistory()const{
+  std::cout<<"History of films:"<<std::endl;
   auto it=_history.begin();
   while(it!=_history.end())
   {
@@ -77,7 +89,8 @@ void User::printHistory(){
   }
  }
 
-void User::printBorrowedFilms(){
+void User::printBorrowedFilms()const{
+  std::cout<<"Borrowed films:"<<std::endl;
   auto it=_borrowedFilms.begin();
   while(it!=_borrowedFilms.end())
   {

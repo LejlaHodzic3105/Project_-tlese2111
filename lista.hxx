@@ -32,8 +32,10 @@ class list
         void pop_front(); // Uklanja prvi elemenat liste,O(1),smanjuje velicinu za 1
         //Ubacuju elemenat iza odjedjene pozicije , koja je proslijedjena u metod,O(1)
 	void pop(Type& val);
-      void insert (const_iterator position, const Type& val);
-       void insert (const_iterator position, Type&& val);
+        void insert (const_iterator position, const Type& val);
+        void insert (const_iterator position, Type&& val);
+        void insertBack (const_iterator position, const Type& val);
+        void insertBack (const_iterator position, Type&& val);
         
         // Pristup elementima
         Type& front();   // Vraca referencu na prvi elemenat liste,O(1)
@@ -468,6 +470,56 @@ void list<Type>::insert (const_iterator position, Type&& val){
 }
 
   }
+
+template<typename Type>
+void list<Type>::insertBack(const_iterator position,const Type& val){
+if(empty())
+(*this).push_back(val);
+
+else{
+nodeType<Type> *newNode;
+newNode=new nodeType<Type>;
+newNode->setInfo(val);
+if((*position).getNext()==nullptr){
+last=newNode;
+
+ }
+newNode->setNext((*position).getNext());
+(*position).setNext(newNode);
+count++;
+
+
+}  
+
+
+}
+
+
+template<typename Type>
+void list<Type>::insertBack(const_iterator position, Type&& val){
+if(empty())
+(*this).push_back(val);
+
+else{
+nodeType<Type> *newNode;
+newNode=new nodeType<Type>;
+newNode->setInfo(val);
+if((*position).getNext()==nullptr){
+last=newNode;
+
+ }
+newNode->setNext((*position).getNext());
+(*position).setNext(newNode);
+count++;
+
+
+}  
+
+
+  }
+
+
+
 
 template<typename Type>
 void list<Type>::pop(Type& val){

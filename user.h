@@ -30,8 +30,8 @@ class User: public Person
   const std::string getUnob()const{return _unob;}
   const Date& getDate() const{return _date;}
   UserAccount& getUserAcc(){ return _useracc;}
-  const list<Film>& getHistory(){ return  _history; }
-  const list<Film>& getBorrowed(){return _borrowedFilms;}
+  list<Film>& getHistory(){ return  _history; }
+  list<Film>& getBorrowed(){return _borrowedFilms;}
   int getNobf(){return _nobf;} 
   User& setDate(const Date& date){_date=date; return *this;}
   User& setUnob(const std::string& unob){_unob=unob; return *this;}
@@ -42,9 +42,10 @@ class User: public Person
   friend std::ostream& operator<<(std::ostream& out, const User& user);
   void borrowFilm(Film& film);// nije const& jer se mora promijeniti _numofCopies
   void returnFilm(Film& film);
-  void printHistory();
-  void printBorrowedFilms();
+  void printHistory()const;
+  void printBorrowedFilms()const;
   bool operator==(const User& user);
+  void printUser()const;
   bool operator!=(const User& user);
 };
 

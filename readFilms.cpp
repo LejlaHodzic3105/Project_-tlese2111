@@ -2,10 +2,10 @@
 
 
 
-void readFilms(std::string file,ListFilms& myList){
+int readFilms(std::string file,ListFilms& myList){
   std::string line;
   Film newFilm;
-  int br=0;
+  int br=0,uniqueKey=-1;
   ifstream nameFileout;
   nameFileout.open(file);
   if(nameFileout.is_open()){
@@ -20,7 +20,12 @@ void readFilms(std::string file,ListFilms& myList){
       temp=line.substr(1,line.size()-1);
       std::stringstream ss(line);
       ss>>dummy;
-      if(dummy=='#')
+      if(dummy=='&')
+      {
+        uniqueKey=std::stoi(temp);
+      
+      }
+      else if(dummy=='#')
       {
       if(br>0)
       {
@@ -105,12 +110,12 @@ void readFilms(std::string file,ListFilms& myList){
 
   else
   {
-    std::cout<< "Taj fajl ne postoji!"<<std::endl; 
+    std::cout<< "File don't exist!"<<std::endl; 
 
   }
   nameFileout.close();
 
-
-
+  
+ return uniqueKey;
 }
 

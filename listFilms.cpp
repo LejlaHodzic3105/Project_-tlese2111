@@ -3,8 +3,9 @@
 
 ListFilms& ListFilms::addFilm(Film& film)
 {
-  if(empty())
+  if(empty()){
     push_back(film);
+  }
 
   else
   {
@@ -19,6 +20,7 @@ ListFilms& ListFilms::addFilm(Film& film)
     }
     
 push_back(film);
+
   }
   return *this;
 }
@@ -34,7 +36,7 @@ void ListFilms::printListFilms()const
   }}
 }
 
-Film ListFilms::findFilm(const string& film)const{
+Film ListFilms::findFilm(const string& film,int key)const{
   ListFilms foundFilms; //lista pronadjenih filmova moze maksimalno biti duga listi svih filmova
   auto it=(*this).begin();
   while(it!=(*this).end())
@@ -47,6 +49,17 @@ Film ListFilms::findFilm(const string& film)const{
   }
     if(foundFilms.size()==0) std::cout<<"Film sa trazenim imenom nije pronadjen!"<<std::endl;
     else if(foundFilms.size()==1) return foundFilms.front();
+    else if(key!=-1)
+    {
+      auto p=foundFilms.begin();
+      while(p!=foundFilms.end())
+      {
+       if((*p).getInfo().getKey()==key){ return (*p).getInfo();}
+      p++;
+
+      }
+
+    }
     else
     {
       std::cout<<"Pronadjeno je "<<foundFilms.size()<< " filmova sa imenom "<< film<< std::endl;
