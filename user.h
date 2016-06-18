@@ -26,7 +26,7 @@ class User: public Person
   User(){_nobf=0;}
   User(const std::string& name,const std::string& surname,std::string& unob,std::string& username,std::string& password);// datum se uzima automatski sa racunara
   ~User()=default;
-  User& setUser(const std::string& name,const std::string& surname,const std::string& unob,const std::string& username,const std::string& password,int day,int month,int year,int nobf);
+  User& setUser(const std::string& name,const std::string& surname,const std::string& unob,const std::string& username,const std::string& password,int day,int month,int year,int nobf); //setovanje usera ukoliko se zeli izbjeci kreiranje novog usera preko konstruktora iznad
   const std::string getUnob()const{return _unob;}
   const Date& getDate() const{return _date;}
   UserAccount& getUserAcc(){ return _useracc;}
@@ -42,12 +42,12 @@ class User: public Person
   friend std::ostream& operator<<(std::ostream& out, const User& user);
   void borrowFilm(Film& film);// nije const& jer se mora promijeniti _numofCopies
   void returnFilm(Film& film);
-  void printHistory()const;
-  void printBorrowedFilms()const;
+  void printHistory()const; //ispisuje historiju posudjivanja
+  void printBorrowedFilms()const; //ispisuje trenutno posudjene
   bool operator==(const User& user);
-  void printUser()const;
+  void printUser()const; //ispisuje podatke o useru
   bool operator!=(const User& user);
-  bool isBorrowed(const Film& film)const;
+  bool isBorrowed(const Film& film)const; //provjerava da li je user posudio odredjeni film, potrebno kod vracanja filma
 };
 
 

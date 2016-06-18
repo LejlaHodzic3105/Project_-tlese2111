@@ -1,6 +1,6 @@
 #include "listFilms.h"
 
-ListFilms& ListFilms::addFilm(Film& film)
+ListFilms& ListFilms::addFilm(Film& film) //dodavanje filma i sortiranje filma pri dodavanju
 {
   if(empty()){
     push_back(film);
@@ -25,7 +25,7 @@ push_back(film);
 }
 
 
-void ListFilms::printListFilms()const
+void ListFilms::printListFilms()const //ispis liste filmova
 { if(empty()) std::cout << "There are no films available" << std::endl;
   else{auto it=(*this).begin();
   while(it!=(*this).end())
@@ -35,17 +35,19 @@ void ListFilms::printListFilms()const
   }}
 }
 
-void ListFilms::printListFilmsByTitle(std::string t)const
+void ListFilms::printListFilmsByTitle(std::string t)const //ispis svih filmova koji imaju proslijedjeni naziv
 { if(empty()) std::cout << "There are no films available" << std::endl;
   else{auto it=(*this).begin();
+  bool exist=false;
   while(it!=(*this).end())
   {
-    if((*it).getInfo().getTitle()==t) (*it).getInfo().printFilm();
+    if((*it).getInfo().getTitle()==t) {(*it).getInfo().printFilm(); exist=true;}
     ++it;
-  }}
-}
+  }
+  if(exist==false) std::cout << "There are no films with that title!" << std::endl;}
+} 
 
-Film ListFilms::findFilm(const string& film,int key)const{
+Film ListFilms::findFilm(const string& film,int key)const{ //metod za trazenje filma po nazivu
   ListFilms foundFilms; //lista pronadjenih filmova moze maksimalno biti duga listi svih filmova
   auto it=(*this).begin();
   while(it!=(*this).end())
@@ -56,9 +58,9 @@ Film ListFilms::findFilm(const string& film,int key)const{
     }
   it++;
   }
-    if(foundFilms.size()==0) throw std::string("Film not found!");
-    else if(foundFilms.size()==1) return foundFilms.front();
-    else if(key!=-1)
+    if(foundFilms.size()==0) throw std::string("Film not found!"); //ukoliko je lista pronadjenih filmova prazna, nema filma
+    else if(foundFilms.size()==1) return foundFilms.front(); //ukoliko je nadjen jedan film sa zadanim nazivom, vratiti taj film
+    else if(key!=-1) //ukoliko se za trazenje filma proslijedi i kljuc, koristi se kod popunjavanja liste historije filmova za korisnika
     {
       auto p=foundFilms.begin();
       while(p!=foundFilms.end())
@@ -69,7 +71,7 @@ Film ListFilms::findFilm(const string& film,int key)const{
       }
 
     }
-    else
+    else //ukoliko je nadjeno vise filmova sa istim nazivom, ponuditi korisniku listu filmova, i zatraziti unos kljuca
     {
       std::cout<<"There are "<<foundFilms.size()<< " films with the title "<< film<< std::endl;
       auto p=foundFilms.begin();
@@ -94,7 +96,7 @@ Film ListFilms::findFilm(const string& film,int key)const{
   throw std::string("Film not found!");
  }	
 
-void ListFilms::removeFilm(const string& film){
+void ListFilms::removeFilm(const string& film){ //brisanje filma, napravljen novi metod pop u lista.hxx
   try{ Film removeF=findFilm(film);
   pop(removeF);}
   catch(std::string a){ std::cout << a << std::endl;}
@@ -102,7 +104,7 @@ void ListFilms::removeFilm(const string& film){
 
 
 
-void ListFilms::updateFilm(const string& film){
+void ListFilms::updateFilm(const string& film){ //azuriranje filma
   try{Film update=findFilm(film);
   int year=update.getYear();
   int izbor;
@@ -128,7 +130,6 @@ void ListFilms::updateFilm(const string& film){
     std::cin >> naziv;
     update.setTitle(naziv);
   }
-  //cin.ignore();
   else if(izbor==2)
   {
     std::cout << "Enter a new description: ";
@@ -208,7 +209,7 @@ void ListFilms::updateFilm(const string& film){
   {
     std::cout<<"Wrong input! "<<std::endl;
   }
-  std::cout<<" If you want more changes enter 1, otherwise enter 0:: "<<std::endl;
+  std::cout<<" If you want more changes enter 1, otherwise enter 0:: "<<std::endl; //nakon sto korisnik nesto izmijeni, ima opciju da mijenja dalje 											     ili napusti azuriranje
   int x;
   cin>>x;
   if(x!=1)
@@ -217,11 +218,11 @@ void ListFilms::updateFilm(const string& film){
   auto k=(*this).begin();
   while(k!=(*this).end())
       {
-       if((*k).getInfo().getKey()==update.getKey()){ (*k).setInfo(update); break;}
+       if((*k).getInfo().getKey()==update.getKey()){ (*k).setInfo(update); break;} //updatovanje filma u listu filmova
        k++;
 
       }
-      if(year!=update.getYear()) // ukoliko je bila azurirana godina izdavanja, u skladu sa tim se mora izvrsiti i ponovno sortiranje,odnosno pozicioniranje filma u odnosu na novu godinu
+      if(year!=update.getYear()) // ukoliko je bila azurirana godina izdavanja, u skladu sa tim se mora izvrsiti i ponovno sortiranje,odnosno 					    pozicioniranje filma u odnosu na novu godinu
       {
       Film temp=update; 
       removeFilm(update.getTitle());
@@ -230,8 +231,19 @@ void ListFilms::updateFilm(const string& film){
   catch(std::string a){std::cout << a << std::endl;}
 }
 
-void ListFilms::printAllInfo(const string& film)const{
+void ListFilms::printAllInfo(const string& film)const{ //ispis svih detalja za trazeni film
   try{Film print=findFilm(film);
   print.printInfo();}
   catch(std::string a){std::cout << a << std::endl;}
  }
+
+bool ListFilms::isBorrowed(const Film& film)const{ //provjerava u listi filmova da li je odredjeni film posudjen
+  if(!empty()){
+  auto it=(*this).begin();
+  while(it!=(*this).end())
+  {
+    if((*it).getInfo()==film) return true;
+    it++;
+  }}
+  return false;
+}

@@ -6,7 +6,7 @@
 #include<iostream>
 #include"listFilms.h"
 #include"listUsers.h"
-void optionsAdmin(ListFilms &,ListUsers &,int &,Administrator &);
-void optionsUser(ListFilms &,ListUsers &,ListFilms &,User&,Administrator &,int);
+void optionsAdmin(ListFilms &,ListUsers &,int &,Administrator &); //opcije za admina
+void optionsUser(ListFilms &,ListUsers &,ListFilms &,User&,Administrator &,int); //opcije za usera
 
 #endif
