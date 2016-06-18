@@ -22,17 +22,17 @@ int readFilms(std::string file,ListFilms& myList){
       ss>>dummy;
       if(dummy=='&')
       {
-        uniqueKey=std::stoi(temp);
+        uniqueKey=std::stoi(temp); //cita se najprije varijabla koja sluzi kao jedinstveni kljuc
       
       }
-      else if(dummy=='#')
+      else if(dummy=='#') // citaju se prvo osnovni podaci o filmu
       {
       if(br>0)
       {
-      myList.addFilm(newFilm);
+      myList.addFilm(newFilm); // film ce se dodati tek u drugoj iteraciji kada se procita prvi film
       }
 
-      std::vector<std::string> vec=split(temp,',');
+      std::vector<std::string> vec=split(temp,','); // split vraca vektor koji sadrzi odvojene podatke o filmu
       title=vec[0];
       year=std::stoi(vec[1]);
       nameD=vec[2];
@@ -49,7 +49,7 @@ int readFilms(std::string file,ListFilms& myList){
 
       }
 
-      else if(dummy=='*')
+      else if(dummy=='*') // citanje opisa filma
       {
         
         if(k==0)
@@ -65,7 +65,7 @@ int readFilms(std::string file,ListFilms& myList){
       }
 
 
-      else if(dummy=='$'){
+      else if(dummy=='$'){ // citanje producenata
         std::vector<std::string> producents=split(temp,',');
         for(int i=0;i<producents.size();i=i+2)
         { 
@@ -77,7 +77,7 @@ int readFilms(std::string file,ListFilms& myList){
         }
       }
 
-       else if(dummy=='%'){
+       else if(dummy=='%'){ // citanje scenarista
         std::vector<std::string> scenarists=split(temp,',');
         for(int i=0;i<scenarists.size();i=i+2)
         { 
@@ -89,7 +89,7 @@ int readFilms(std::string file,ListFilms& myList){
         }
       }
 
-       else if(dummy=='/'){
+       else if(dummy=='/'){ // citanje glumaca
         std::vector<std::string> actors=split(temp,',');
         for(int i=0;i<actors.size();i=i+2)
         { 
@@ -103,8 +103,8 @@ int readFilms(std::string file,ListFilms& myList){
 
     }
     if(br!=0)
-    myList.addFilm(newFilm); 
-
+    myList.addFilm(newFilm); // zadnji film u petlji nece biti dodan zbog cega se mora dodati ova linija za dodavanje zadnjeg filma
+ 
   }
 
 

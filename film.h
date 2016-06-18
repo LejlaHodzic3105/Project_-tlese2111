@@ -23,7 +23,7 @@ class Film
 
   public:
    Film():_year(0),_numOfCopies(0),_key(0){};
-   ~Film()=default;
+   ~Film()=default;//destruktor
    const std::string getTitle()const {return _title;}
    const std::string getDescription()const {return _description;}
    const std::string getCompany()const {return _productionCompany;}
@@ -46,12 +46,12 @@ class Film
    void setActors(const Person actor){_listOfActors.push_back(actor);}
    void setFilm(const std::string title,int year,const std::string nameD,const std::string surnameD,const std::string prodC,int key,int num);
    void printFilm()const{std::cout<<"Title: "<<_title <<std::endl<<"Year of release: "<< _year<<std::endl;} // pregled sadrzaja videoteke,svi filmovi sortirani po godini
-   void printInfo()const;
+   void printInfo()const;// metod ispisuje sve podatke o filmu
    bool operator==(const Film &film);
    bool operator!=(const Film &film);
    void clearProducents(){ _listOfProducents.clear();} //za azuriranje, kada zeli da promijeni producente, moramo prvo isprazniti listu postojecih producenata
-   void clearScenarists(){ _listOfScenarists.clear();}
-   void clearActors(){ _listOfActors.clear();}
+   void clearScenarists(){ _listOfScenarists.clear();}// za azuriranje , kada korisnik zeli promijeniti scenariste, mora prvo isprazniti listu
+   void clearActors(){ _listOfActors.clear();}// za azuriranje
    Film& operator=(const Film &other);
    Film& operator=(Film &&other);
    Film(const Film &other);

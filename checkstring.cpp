@@ -2,7 +2,7 @@
 bool check_string_all_digits(const std::string &a)
 {
   bool numbers=true;
-  for(int i=0;i<a.size();i++) numbers=numbers && (a[i]>='0' && a[i]<='9');
+  for(int i=0;i<a.size();i++) numbers=numbers && (a[i]>='0' && a[i]<='9'); // provjerava jesu li sve brojevi
   return numbers;
 }
 
