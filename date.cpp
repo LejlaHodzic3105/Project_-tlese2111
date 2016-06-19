@@ -2,5 +2,5 @@
 
 void Date::printDate() const
 {
-  std::cout<<"Date: "<<_day<<"."<<_month<<"."<<_year<<std::endl;
+  std::cout<<"\033[1;34mDate: \033[0m"<<_day<<"."<<_month<<"."<<_year<<std::endl;
 }

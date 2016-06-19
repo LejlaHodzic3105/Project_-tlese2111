@@ -29,18 +29,18 @@ User::User(const std::string& name,const std::string& surname,std::string& unob,
     struct tm * now = localtime( & t );
     _date.setDate((now->tm_year + 1900),(now->tm_mon + 1),now->tm_mday); //automatsko postavljanje datuma sa racunara
     while(unob.size()!=13 || !check_string_all_digits(unob)) //provjera validnosti jmbg
-    {   std::cout << "Unique number of birth must contain exactly 13 digits. Please enter it correctly: ";
+    {   std::cout << "\033[1;34mUnique number of birth must contain exactly 13 digits. Please enter it correctly: \033[0m";
 	getline(std::cin,unob);
     }
     _unob=unob;
     while(check_string_for_spaces(username)) //provjera da li username ima prazno mjesto
     {
-	std::cout << "Username can't contain blank spaces. Please enter a new one: ";
+	std::cout << "\033[1;34mUsername can't contain blank spaces. Please enter a new one: \033[0m";
 	getline(std::cin,username);
     }
-    while(check_string_for_spaces(password)) //provjera da li password ima prazno mjesto
+    while(check_string_for_spaces(password) || password.size()<6) //provjera da li password ima prazno mjesto i da li je kraci od 6 karaktera
     {
-	std::cout << "Password can't contain blank spaces. Please enter a new one: ";
+	std::cout << "\033[1;34mPassword can't contain blank spaces and must have at least 6 characters. Please enter a new one: \033[0m";
 	getline(std::cin,password);
     }
     _useracc.setUserAccount(username,password);
@@ -59,14 +59,14 @@ User& User::setUser(const std::string& name,const std::string& surname,const std
 }
 
 void User::borrowFilm(Film& film){ //posudjivanje filma
-  if(film.getNumOfCopies()==0) cout<<"Film is not available!"<<std::endl; //broj kopija==0, ispis greske
-  else if(_nobf==3) cout << "You can borrow only 3 films. First return one of films." << std::endl; //broj posudjenih==3 ispis greske
+  if(film.getNumOfCopies()==0) cout<<"\033[1;31mFilm is not available!\033[0m"<<std::endl; //broj kopija==0, ispis greske
+  else if(_nobf==3) cout << "\033[1;31mYou can borrow only 3 films. First return one of films.\033[0m" << std::endl; //broj posudjenih==3 ispis greske
   else{
   _nobf++; //povecaj broj posudjenih
   _borrowedFilms.push_back(film);
   _history.push_back(film);
   film.setNumOfCopies(film.getNumOfCopies()-1); //smanji broj kopija filma
-  cout << "You have succesfully borrowed "<< film.getTitle() << endl;
+  cout << "\033[1;31mYou have succesfully borrowed \033[0m"<< film.getTitle() << endl;
 }
 }
 
@@ -75,9 +75,9 @@ void User::returnFilm(Film& film){//vracanje filma
   _nobf--; //smanji broj posudjenih
   film.setNumOfCopies(film.getNumOfCopies()+1); //povecaj broj kopija filma
   _borrowedFilms.pop(film);
-  std::cout << "You have successfully returned film." << std::endl;
+  std::cout << "\033[1;31mYou have successfully returned film.\033[0m" << std::endl;
 }
-  else std::cout << "You havent borrowed that film yet." << std::endl;
+  else std::cout << "\033[1;31mYou havent borrowed that film yet.\033[0m" << std::endl;
 }
 
 bool User::isBorrowed(const Film& film)const{ //provjerava da li je user posudio odredjeni film
@@ -94,7 +94,7 @@ bool User::isBorrowed(const Film& film)const{ //provjerava da li je user posudio
 void User::printHistory()const{ //ispisuje historiju posudjivanja filmova
   
   if(!_history.empty()){
-  std::cout<<"History of borrowed films:"<<std::endl;
+  std::cout<<"\033[1;34mHistory of borrowed films:\033[0m"<<std::endl;
   auto it=_history.begin();
   while(it!=_history.end())
   {
@@ -102,14 +102,14 @@ void User::printHistory()const{ //ispisuje historiju posudjivanja filmova
     it++;
   }}
   else{
-    std::cout<<"History of films is empty!"<<std::endl;
+    std::cout<<"\033[1;31mHistory of films is empty!\033[0m"<<std::endl;
   }
  }
 
 void User::printBorrowedFilms()const{ //ispisuje trenutno posudjene filmove
   if(!_borrowedFilms.empty())
   {
-  std::cout<<"Borrowed films:"<<std::endl;
+  std::cout<<"\033[1;34mBorrowed films:\033[0m"<<std::endl;
   auto it=_borrowedFilms.begin();
   while(it!=_borrowedFilms.end())
   {
@@ -118,7 +118,7 @@ void User::printBorrowedFilms()const{ //ispisuje trenutno posudjene filmove
   }}
   else
   {
-    std::cout<<"List of borrowed films is empty!"<<std::endl;
+    std::cout<<"\033[1;31mList of borrowed films is empty!\033[0m"<<std::endl;
   }
  }
 

@@ -84,23 +84,23 @@ void Film::setFilm(const std::string title,int year,const std::string nameD,cons
 
 void Film::printInfo() const
 {
-  std::cout<<"Title: "<< _title<<std::endl;
-  std::cout<<"Description: "<< _description<<std::endl;
-  std::cout<<"Director: ";
+  std::cout<<"\033[1;34mTitle: \033[0m"<< _title<<std::endl;
+  std::cout<<"\033[1;34mDescription: \033[0m"<< _description<<std::endl;
+  std::cout<<"\033[1;34mDirector: \033[0m";
   _director.printPerson();
   std::cout<<std::endl;
-  std::cout<<"Production Company: "<< _productionCompany<<std::endl;
-  std::cout<<"Producents: "<<std::endl;
+  std::cout<<"\033[1;34mProduction company: \033[0m"<< _productionCompany<<std::endl;
+  std::cout<<"\033[1;34mProducents: \033[0m"<<std::endl;
   _listOfProducents.print();
   std::cout<<std::endl;
-  std::cout<<"Actors: "<<std::endl;
+  std::cout<<"\033[1;34mActors: \033[0m"<<std::endl;
   _listOfActors.print();
   std::cout<<std::endl;
-  std::cout<<"Screenwriters:"<<std::endl;
+  std::cout<<"\033[1;34mScreenwriters: \033[0m"<<std::endl;
   _listOfScenarists.print();
   std::cout<<std::endl;
-  std::cout<<"Year of release: "<<_year<<std::endl;
-  std::cout<<"Number of copies: "<<_numOfCopies<<std::endl;
-  std::cout<<"Unique key: "<<_key<<std::endl;
+  std::cout<<"\033[1;34mYear of release: \033[0m"<<_year<<std::endl;
+  std::cout<<"\033[1;34mNumber of copies: \033[0m"<<_numOfCopies<<std::endl;
+  std::cout<<"\033[1;34mUnique key: \033[0m"<<_key<<std::endl;
 
 }

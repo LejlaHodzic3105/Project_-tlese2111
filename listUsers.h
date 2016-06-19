@@ -4,6 +4,7 @@
 #include "user.h"
 #include "lista.hxx"
 #include <iostream>
+#include "checkstring.h" //potrebno kod unosenja izbora u metodu updateuser
 
 class ListUsers :public list<User>{
   public:

@@ -45,7 +45,8 @@ class Film
    void setScenarists(const Person scenarist){_listOfScenarists.push_back(scenarist);}
    void setActors(const Person actor){_listOfActors.push_back(actor);}
    void setFilm(const std::string title,int year,const std::string nameD,const std::string surnameD,const std::string prodC,int key,int num);
-   void printFilm()const{std::cout<<"Title: "<<_title <<std::endl<<"Year of release: "<< _year<<std::endl;} // pregled sadrzaja videoteke,svi filmovi 															sortirani po godini
+   void printFilm()const{std::cout<<"\033[1;34mTitle: \033[0m"<<_title <<std::endl<<"\033[1;34mYear of release: \033[0m"<< _year<<std::endl;}   
+   //pregled sadrzaja videoteke,svi filmovi sortirani po godini
    void printInfo()const; //ispis svih podataka o filmu
    bool operator==(const Film &film);
    bool operator!=(const Film &film);

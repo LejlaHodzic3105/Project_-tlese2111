@@ -19,7 +19,7 @@ void readUsers(std::string file,ListUsers& myList,ListFilms& historyFilms,Admini
       temp=line.substr(1,line.size()-1);
       std::stringstream ss(line);
       ss>>dummy;
-      if(dummy=='&')
+      if(dummy=='&') // prije svega se iz fajla cita admin, on se nalazi prvi u fajlu
       {
         std::vector<std::string> adm=split(temp,',');
         nameA=adm[0];
@@ -30,11 +30,11 @@ void readUsers(std::string file,ListUsers& myList,ListFilms& historyFilms,Admini
 
 
       }
-      if(dummy=='#')
+      if(dummy=='#') // citanje osnovnih podataka o korisniku
       {
         if(br>0)
         {
-          myList.addUser(newUser);
+          myList.addUser(newUser); // dodavanje ce se izvrsiti u drugoj iteraciji kada prvi korisnik bude procitan
         }
 
         std::vector<std::string> vec=split(temp,',');
@@ -50,16 +50,15 @@ void readUsers(std::string file,ListUsers& myList,ListFilms& historyFilms,Admini
         newUser.setUser(name,surname,unob,username,password,day,month,year,nobf);
         newUser.getHistory().clear();
         newUser.getBorrowed().clear();
-        // newFilm.clearActors();
         br++;
 
 
 
       }
 
-      else if(dummy=='/')
+      else if(dummy=='/') // citanje korisnikove historije filmova
       {
-        std::vector<std::string> history=split(temp,',');
+        std::vector<std::string> history=split(temp,','); // split vraca vektor koji sadrzi ekstraktovane podatke iz historije(file)
         for(int i=0;i<history.size();i=i+2)
         { 
           title=history[i];
@@ -70,11 +69,11 @@ void readUsers(std::string file,ListUsers& myList,ListFilms& historyFilms,Admini
           newUser.setHistory(newFilm);
         }
         else
-          std::cout<<"History of films is empty! "<<std::endl;
+          std::cout<<"\033[1;31mHistory of films is empty!\033[0m"<<std::endl;
       }
       }
 
-      else if(dummy=='$'){
+      else if(dummy=='$'){ //citanje liste posudjenih filmova, na isti nacin kao i historija
         std::vector<std::string> borrowed=split(temp,',');
         for(int i=0;i<borrowed.size();i=i+2)
         { 
@@ -86,20 +85,20 @@ void readUsers(std::string file,ListUsers& myList,ListFilms& historyFilms,Admini
 
         }
           else
-            std::cout<<"History of films is empty!"<<std::endl;
+            std::cout<<"\033[1;31mHistory of films is empty!\033[0m"<<std::endl;
 
       }
      }
     }
     if(br!=0)
-      myList.addUser(newUser);
+      myList.addUser(newUser); // posljednji korisnik nece biti dodan u while petlji, zbog cega se za njega dodaje poslije petlje
 
   }
 
 
   else
   {
-    std::cout<< "File doesn't exist!"<<std::endl; 
+    std::cout<< "\033[1;31mFile doesn't exist!\033[0m"<<std::endl; 
 
   }
   nameFileout.close();

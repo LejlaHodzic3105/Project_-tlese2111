@@ -5,6 +5,7 @@
 #include "lista.hxx"
 #include <iostream>
 #include <string>
+#include "checkstring.h" //za ispravan unos inta potrebna funkcija enter_int()
 
 class ListFilms :public list<Film>{
   public:
