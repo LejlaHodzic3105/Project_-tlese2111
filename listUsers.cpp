@@ -8,10 +8,10 @@ ListUsers& ListUsers::addUser(User& user){ //dodavanje usera, i sortiranje
     std::string username;
     getline(std::cin,username);
     while(check_string_for_spaces(username)) //provjerava da li username ima prazno mjesto
-    {
-      std::cout << "Username can't contain blank spaces. Please enter a new one: ";
-      getline(std::cin,username);
-    }
+      {
+	std::cout << "Username can't contain blank spaces. Please enter a new one: ";
+	getline(std::cin,username);
+      }
     user.getUserAcc().setUsername(username);
   }
   if(empty()){
@@ -25,19 +25,33 @@ ListUsers& ListUsers::addUser(User& user){ //dodavanje usera, i sortiranje
       int day=(*it).getInfo().getDate().getDay();
       int month=(*it).getInfo().getDate().getMonth();
       int year=(*it).getInfo().getDate().getYear();
-      int Uyear=user.getDate().getYear();
-      int Umonth=user.getDate().getMonth();
-      int Uday=user.getDate().getDay();
-
-      int date=year*1000+month*100+day;
-      int dateU=Uyear*1000+Umonth*100+Uday;
-
-      if(dateU>=date)
-      {
-        insert(it,user);
+      if(user.getDate().getYear()==year && user.getDate().getMonth()==month && user.getDate().getDay()<day){
+        insertBack(it,user);
+        return *this;
+      }
+       if(user.getDate().getYear()==year && user.getDate().getMonth()<month){
+        insertBack(it,user);
         return *this;
       }
 
+
+
+      if(user.getDate().getYear()>=year){
+        br++;
+        if(user.getDate().getMonth()>=month){
+          br++;
+          if(user.getDate().getDay()>=day){
+            insert(it,user);
+            br=0;
+            return *this;
+          }
+        }
+      }
+
+      if(br>=1){
+        insert(it,user);
+        return *this;
+      }
       ++it;
     }
     push_back(user);

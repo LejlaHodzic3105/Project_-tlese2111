@@ -19,7 +19,7 @@ void readUsers(std::string file,ListUsers& myList,ListFilms& historyFilms,Admini
       temp=line.substr(1,line.size()-1);
       std::stringstream ss(line);
       ss>>dummy;
-      if(dummy=='&') // prije svega se iz fajla cita admin, on se nalazi prvi u fajlu
+      if(dummy=='&')
       {
         std::vector<std::string> adm=split(temp,',');
         nameA=adm[0];
@@ -30,11 +30,11 @@ void readUsers(std::string file,ListUsers& myList,ListFilms& historyFilms,Admini
 
 
       }
-      if(dummy=='#') // citanje osnovnih podataka o korisniku
+      if(dummy=='#')
       {
         if(br>0)
         {
-          myList.addUser(newUser); // dodavanje ce se izvrsiti u drugoj iteraciji kada prvi korisnik bude procitan
+          myList.addUser(newUser);
         }
 
         std::vector<std::string> vec=split(temp,',');
@@ -50,15 +50,16 @@ void readUsers(std::string file,ListUsers& myList,ListFilms& historyFilms,Admini
         newUser.setUser(name,surname,unob,username,password,day,month,year,nobf);
         newUser.getHistory().clear();
         newUser.getBorrowed().clear();
+        // newFilm.clearActors();
         br++;
 
 
 
       }
 
-      else if(dummy=='/') // citanje korisnikove historije filmova
+      else if(dummy=='/')
       {
-        std::vector<std::string> history=split(temp,','); // split vraca vektor koji sadrzi ekstraktovane podatke iz historije(file)
+        std::vector<std::string> history=split(temp,',');
         for(int i=0;i<history.size();i=i+2)
         { 
           title=history[i];
@@ -73,7 +74,7 @@ void readUsers(std::string file,ListUsers& myList,ListFilms& historyFilms,Admini
       }
       }
 
-      else if(dummy=='$'){ //citanje liste posudjenih filmova, na isti nacin kao i historija
+      else if(dummy=='$'){
         std::vector<std::string> borrowed=split(temp,',');
         for(int i=0;i<borrowed.size();i=i+2)
         { 
@@ -91,7 +92,7 @@ void readUsers(std::string file,ListUsers& myList,ListFilms& historyFilms,Admini
      }
     }
     if(br!=0)
-      myList.addUser(newUser); // posljednji korisnik nece biti dodan u while petlji, zbog cega se za njega dodaje poslije petlje
+      myList.addUser(newUser);
 
   }
 

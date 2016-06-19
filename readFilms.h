@@ -11,6 +11,6 @@
 #include <string>
 #include <fstream>
 
-int readFilms(std::string,ListFilms&); // funkcija za citanje fajla filmova,vraca jedinstveni kljuc procitan iz fajla
+int readFilms(std::string,ListFilms&); // funkcija za citanje fajla filmova
 
 #endif

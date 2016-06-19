@@ -10,8 +10,8 @@ class Administrator: public Person
   UserAccount _useracc;
 
   public:
-  Administrator():Person("William","Watson"){_useracc.setUserAccount("William_W","newPasscode");}//administrator postoji od pocetka do kraja, ne dodaje se u sistem
-  ~Administrator()=default;//destruktor
+  Administrator():Person("William","Watson"){_useracc.setUserAccount("William_W","newPasscode");}
+  ~Administrator()=default;
   void setAdmin(const std::string& name,const std::string& surname,const std::string& username,const std::string& password){(*this).setPerson(name,surname),(*this)._useracc.setUserAccount(username,password);}
   UserAccount& getUserAcc(){return _useracc;}
 

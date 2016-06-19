@@ -1,30 +1,10 @@
-#Cinderella,2015,Kenneth,Branagh,Beagle Pug Films,5,8
-*When her father unexpectedly passes away,young Ella finds herself at the mercy of her cruel stepmother and her scheming step-sisters.
-$Steve,Harding,Todd,Livdahl,Katie,Reynolds
-%Chris,Weitz,Ben,Chaplin
-/Cate,Blanchett,Lily,James,Richard,Madden
-#Now You See Me,2013,Louis,Leterrier,Summit Entertainment,6,6
-*An FBI agent and an Interpol detective track a team of illusionists who pull off bank heists during their performances and reward their audiences with the money.
-$Jose,Garcia,Dave,Franco
-%Ed,Solomon
-/Jesse,Eisenberg,Mark,Ruffalo
 #The Last Song,2010,Julie Ann,Ribinson,Touchstone Pictures,2,8
 *A rebellious girl is sent to a Southern beach town for the summer to stay with her father.Through their mutual love of music, the estranged duo learn to recconect.
 $Jayne,Armstrong,Christa,Vausbinder,Dara,Weintraub
 %Nicholas,Sparks,Jeff,Wie
 /Miley,Cyrus,Liam,Hemsworth,Greg,Kinear
-#Avatar,2009,James,Cameron,Touchstone Pictures,4,4
-*A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.
-$Colin,Wilson,Josh,McLaglen,Brooke,Breton
-%James,Cameron,Laeta,Kalogridis
-/Sam,Worthin,Zoe,Saladana,Stephen,Liam
 #Notebook,2004,Nick,Cassavetes,New Line Cinema,1,5
 *A poor and passionate young man falls in love with a rich young woman and gives her a sense of freedom.They soon are separated by their social  differences.
 $Erik,Holmberg,Todd,Lewis,Rick,Reynolds,Bernard,Vincent
 %Jeremy,Leven,Jan,Sardi
 /Gena,Rowlands,James,Garner,Rachel,McAdams
-#Titanic,1997,James,Cameron,New Cinema Line,3,1
-*A seventeen year old aristocrat falls in love with kind,but poor artist aboard the luxurious Titanic.
-$James,Cameron,Pamela,Easily
-%Grant,Hill,Sharoon,Man
-/Leonadro,DiCaprio,Kate,Winslet,Billy,Zane
