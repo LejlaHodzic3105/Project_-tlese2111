@@ -65,32 +65,40 @@ getline(std::cin,dsurname);
 newfilm.setDirector(dname,dsurname);
 std::cout << "\033[1;34mHow many producers do you wish to enter: \033[0m";
 br=enter_int();
+cin.ignore();
 for(int i=1;i<=br;i++)
 {
-std::cout << "\033[1;34mEnter the name and the surname of the "<< i << ". producer: \033[0m";
+std::cout << "\033[1;34mEnter the name of the "<< i << ". producer: \033[0m";
 std::string ime,prezime;
-std::cin >> ime >> prezime;
+getline(std::cin,ime);
+std::cout << "\033[1;34mEnter the surname of the "<< i << ". producer: \033[0m";
+getline(std::cin,prezime);
 newfilm.setProducents(Person(ime,prezime));
 }
 std::cout << "\033[1;34mHow many screenwriters do you wish to enter: \033[0m";
 br=enter_int();
+cin.ignore();
 for(int i=1;i<=br;i++)
 {
-std::cout << "\033[1;34mEnter the name and the surname of the "<< i << ". screenwriter: \033[0m";
+std::cout << "\033[1;34mEnter the name of the "<< i << ". screenwriter: \033[0m";
 std::string ime,prezime;
-std::cin >> ime >> prezime;
+getline(std::cin,ime);
+std::cout << "\033[1;34mEnter the surname of the "<< i << ". screenwriter: \033[0m";
+getline(std::cin,prezime);
 newfilm.setScenarists(Person(ime,prezime));
 }
 std::cout << "\033[1;34mHow many actors do you wish to enter: \033[0m";
 br=enter_int();
+cin.ignore();
 for(int i=1;i<=br;i++)
 {
-std::cout << "\033[1;34mEnter the name and the surname of the "<< i << ". actor: \033[0m";
+std::cout << "\033[1;34mEnter the name of the "<< i << ". actor: \033[0m";
 std::string ime,prezime;
-std::cin >> ime >> prezime;
+getline(std::cin,ime);
+std::cout << "\033[1;34mEnter the surname of the "<< i << ". actor: \033[0m";
+getline(std::cin,prezime);
 newfilm.setActors(Person(ime,prezime));
 }
-cin.ignore();
 std::cout << "\033[1;34mEnter the name of the production company: \033[0m";
 cin.ignore();
 getline(std::cin,comp);
@@ -131,14 +139,16 @@ std::cout << "\033[1;34m1.If you want to search by username enter 1:\033[0m" << 
 std::cout << "\033[1;34m2.If you want to search by name and surname enter 2:\033[0m" << std::endl; //2.opcija trazenja po imenu i prezimenu
 std::string s1,s2;
 br=enter_int();
-if(br==1){ std::cout << "\033[1;34mEnter username: \033[0m"; //opcija trazenja po usernameu
 cin.ignore();
+if(br==1){ std::cout << "\033[1;34mEnter username: \033[0m"; //opcija trazenja po usernameu
 getline(std::cin,s1);
 try{listU.findUserByUsername(s1).printUser();} //try catch blok, ukoliko nema tog usera, ispisuje gresku
 catch(std::string a){std::cout <<"\033[1;31m"<< a << "\033[0m" << std::endl;}
 }
-else if(br==2){std::cout << "\033[1;34mEnter name and surname:\033[0m"; //opcija trazenja po imenu i prezimenu
-std::cin >> s1 >> s2;
+else if(br==2){std::cout << "\033[1;34mEnter name:\033[0m"; //opcija trazenja po imenu i prezimenu
+getline(std::cin,s1);
+std::cout << "\033[1;34mEnter surname:\033[0m";
+getline(std::cin,s2);
 try{listU.findUserByName(s1,s2).printUser();} //try catch blok, ukoliko nema tog usera, ispisuje gresku
 catch(std::string a){std::cout <<"\033[1;31m"<< a << "\033[0m" << std::endl;}
 }
@@ -180,8 +190,11 @@ listU.removeUser(s1); //ista funkcija se koristi za brisanje usera po usernameu 
                       //ukoliko taj string ostane prazan znaci da je brisanje po usernameu, u suprotnom znaci da je brisanje po imenu i prezimenu
 }
 else if(br==2){
-cout << "\033[1;34mEnter the name and the surname: \033[0m";
-cin >> s1 >> s2;
+cin.ignore();
+std::cout << "\033[1;34mEnter name:\033[0m"; //opcija trazenja po imenu i prezimenu
+getline(std::cin,s1);
+std::cout << "\033[1;34mEnter surname:\033[0m";
+getline(std::cin,s2);
 listU.removeUser(s1,s2);
 }
 }
@@ -199,8 +212,11 @@ listU.updateUser(s1); //ista funkcija se koristi za azuriranje usera po username
                       //ukoliko taj string ostane prazan znaci da je brisanje po usernameu, u suprotnom znaci da je brisanje po imenu i prezimenu
 }
 else if(br==2){
-cout << "\033[1;34mEnter the name and the surname: \033[0m";
-cin >> s1 >> s2;
+cin.ignore();
+std::cout << "\033[1;34mEnter name:\033[0m"; //opcija trazenja po imenu i prezimenu
+getline(std::cin,s1);
+std::cout << "\033[1;34mEnter surname:\033[0m";
+getline(std::cin,s2);
 listU.updateUser(s1,s2);
 }
 }
@@ -218,8 +234,11 @@ try{listU.findUserByUsername(s1).printBorrowedFilms();}
 catch(std::string a){std::cout <<"\033[1;31m"<< a << "\033[0m" << std::endl;}
 }
 else if(br==2){
-cout << "\033[1;34mEnter the name and the surname: \033[0m";
-cin >> s1 >> s2;
+cin.ignore();
+std::cout << "\033[1;34mEnter name:\033[0m"; //opcija trazenja po imenu i prezimenu
+getline(std::cin,s1);
+std::cout << "\033[1;34mEnter surname:\033[0m";
+getline(std::cin,s2);
 try{listU.findUserByName(s1,s2).printBorrowedFilms();}
 catch(string a){std::cout <<"\033[1;31m"<< a << "\033[0m" << std::endl;}
 }
@@ -238,8 +257,11 @@ try{listU.findUserByUsername(s1).printHistory();}
 catch(std::string a){std::cout <<"\033[1;31m"<< a << "\033[0m" << std::endl;}
 }
 else if(br==2){
-cout << "\033[1;34mEnter the name and the surname: \033[0m";
-cin >> s1 >> s2;
+cin.ignore();
+std::cout << "\033[1;34mEnter name:\033[0m"; //opcija trazenja po imenu i prezimenu
+getline(std::cin,s1);
+std::cout << "\033[1;34mEnter surname:\033[0m";
+getline(std::cin,s2);
 try{listU.findUserByName(s1,s2).printHistory();}
 catch(std::string a){std::cout <<"\033[1;31m"<< a << "\033[0m" << std::endl;}
 }
