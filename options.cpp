@@ -8,6 +8,7 @@ void optionsAdmin(ListFilms &listF,ListUsers &listU,int &key,Administrator &admi
 while(true) //sve dok admin ne unese 14 (izlaz iz programa), nudi mu se izbor opcija
 {
 int choice;
+cout<<"\033[1;32m--- Options --- \033[0m"<< std::endl;
 std::cout << "\033[1;34m1. Enter 1 to review contents of the videostore" << std::endl;
 std::cout << "2. Enter 2 to search the videostore by title" << std::endl;
 std::cout << "3. Enter 3 to see all data for entered film title" << std::endl;
@@ -259,6 +260,7 @@ int choice;
 
 while(true)
 {
+cout<<"\033[1;32m--- Options --- \033[0m"<< std::endl;
 std::cout << "\033[1;34m1. Enter 1 to review contents of the videostore" << std::endl;
 std::cout << "2. Enter 2 to search the videostore by title" << std::endl;
 std::cout << "3. Enter 3 to see all data for entered film title" << std::endl;

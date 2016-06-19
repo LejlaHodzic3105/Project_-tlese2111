@@ -37,11 +37,17 @@ void ListFilms::printListFilms()const //ispis liste filmova
 
 void ListFilms::printListFilmsByTitle(std::string t)const //ispis svih filmova koji imaju proslijedjeni naziv
 { if(empty()) std::cout << "\033[1;31mThere are no films available! \033[0m" << std::endl;
-  else{auto it=(*this).begin();
+  else{
+
+  auto it=(*this).begin();
   bool exist=false;
   while(it!=(*this).end())
   {
-    if((*it).getInfo().getTitle()==t) {(*it).getInfo().printFilm(); exist=true;}
+    
+    if((*it).getInfo().getTitle()==t) {
+
+     (*it).getInfo().printFilm(); exist=true;
+}
     ++it;
   }
   if(exist==false) std::cout << "\033[1;31mThere are no films with that title! \033[0m" << std::endl;}
@@ -110,7 +116,7 @@ void ListFilms::updateFilm(const string& film){ //azuriranje filma
   int a=1;
   while(a==1)
   {
-  std::cout<< "\033[1;34m ---- Options ---- " << std::endl;
+  std::cout<< "\033[1;32m--- Options --- \033[0m"<< std::endl;
   std::cout<< "\033[1;34m1. Enter 1 to change the title: "<<std::endl;
   std::cout<< "\033[1;34m2. Enter 2 to change the description: "<<std::endl;
   std::cout<< "\033[1;34m3. Enter 3 to change the director: "<<std::endl;
@@ -126,21 +132,26 @@ void ListFilms::updateFilm(const string& film){ //azuriranje filma
   {
     std::cout << "\033[1;34mEnter a new title: \033[0m";
     std::string naziv;
-    std::cin >> naziv;
+    std::cin.ignore();
+    getline(std::cin,naziv);
     update.setTitle(naziv);
   }
   else if(izbor==2)
   {
     std::cout << "\033[1;34mEnter a new description: \033[0m";
     std::string opis;
-    std::cin >> opis;
+    std::cin.ignore();
+    getline(std::cin,opis);
     update.setDescription(opis);
   }
   else if(izbor==3)
   {
-    std::cout << "\033[1;34mEnter the name and the surname od the director: \033[0m";
+    std::cout << "\033[1;34mEnter the name  of the director: \033[0m";
     std::string ime,prezime;
-    std::cin >> ime >> prezime;
+    std::cin.ignore();
+    getline(std::cin,ime);
+    std::cout << "\033[1;34mEnter the surname  of the director: \033[0m";
+    getline(std::cin,prezime);
     update.setDirector(ime,prezime);
   }
   
@@ -148,7 +159,8 @@ void ListFilms::updateFilm(const string& film){ //azuriranje filma
   {
     std::cout << "\033[1;34mEnter the name of the production company: \033[0m";
     std::string kompanija;
-    std::cin >> kompanija;
+    std::cin.ignore();
+    getline(std::cin,kompanija);
     update.setCompany(kompanija);
   }
   else if(izbor==5)
@@ -170,11 +182,14 @@ void ListFilms::updateFilm(const string& film){ //azuriranje filma
     std::cout << "\033[1;34mHow many producers do you wish to enter: \033[0m";
     int broj;
     broj=enter_int();
+    std::cin.ignore();
     for(int i=1;i<=broj;i++)
     {
-      std::cout << "\033[1;34mEnter the name and the surname of the "<< i << ". producer: \033[0m";
+      std::cout << "\033[1;34mEnter the name of the "<< i << ". producer: \033[0m";
       std::string ime,prezime;
-      std::cin >> ime >> prezime;
+      getline(std::cin,ime);
+      std::cout << "\033[1;34mEnter the surname of the "<< i << ". producer: \033[0m";
+      getline(std::cin,prezime);
       update.setProducents(Person(ime,prezime));
     }
   }
@@ -183,11 +198,14 @@ void ListFilms::updateFilm(const string& film){ //azuriranje filma
     std::cout << "\033[1;34mHow many screenwriters do you wish to enter: \033[0m";
     int broj;
     broj=enter_int();
+    std::cin.ignore();
     for(int i=1;i<=broj;i++)
     {
-      std::cout << "\033[1;34mEnter the name and the surname of the "<< i << ". screenwriter: \033[0m";
+      std::cout << "\033[1;34mEnter the name of the "<< i << ". screenwriter: \033[0m";
       std::string ime,prezime;
-      std::cin >> ime >> prezime;
+      getline(std::cin,ime);
+      std::cout << "\033[1;34mEnter the surname of the "<< i << ". screenwriter: \033[0m";
+      getline(std::cin,prezime);
       update.setScenarists(Person(ime,prezime));
     }
   }
@@ -196,11 +214,14 @@ void ListFilms::updateFilm(const string& film){ //azuriranje filma
     std::cout << "\033[1;34mHow many actors do you wish to enter: \033[0m";
     int broj;
     broj=enter_int();
+    cin.ignore();
     for(int i=1;i<=broj;i++)
     {
-      std::cout << "\033[1;34mEnter the name and the surname of the "<< i << ". actor: \033[0m";
+      std::cout << "\033[1;34mEnter the name of the "<< i << ". actor: \033[0m";
       std::string ime,prezime;
-      std::cin >> ime >> prezime;
+      getline(std::cin,ime);
+      std::cout << "\033[1;34mEnter the surname of the "<< i << ". actor: \033[0m";
+      getline(std::cin,prezime);
       update.setActors(Person(ime,prezime));
     }
   }

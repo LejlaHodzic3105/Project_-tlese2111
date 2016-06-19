@@ -119,9 +119,10 @@ void ListUsers::updateUser(const std::string &s1,const std::string &s2) //azurir
     std::string name;
     std::string surname;
     std::cout<<"\033[1;34mEnter a new name: \033[0m";
-    std::cin>>name;
+    std::cin.ignore();
+    getline(std::cin,name);
     std::cout<<"\033[1;34mEnter a new surname: \033[0m";
-    std::cin>>surname;
+    getline(std::cin,surname);
     update.setPerson(name,surname);
 
 
