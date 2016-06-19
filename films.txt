@@ -1,4 +1,4 @@
-&7
+&11
 #Cinderella,2015,Kenneth,Branagh,Beagle Pug Films,5,8
 *When her father unexpectedly passes away,young Ella finds herself at the mercy of her cruel stepmother and her scheming step-sisters.
 $Steve,Harding,Todd,Livdahl,Katie,Reynolds
@@ -24,11 +24,26 @@ $Jayne,Armstrong,Christa,Vausbinder,Dara,Weintraub
 $Colin,Wilson,Josh,McLaglen,Brooke,Breton
 %James,Cameron,Laeta,Kalogridis
 /Sam,Worthin,Zoe,Saladana,Stephen,Liam
+#Notebook,2008,Richard,Gurrow,New Cinema,11,5
+*A young widow discovers that her late husband has left her 10 messages intended to help ease her pain and start new life.
+$Gina,Gersley
+%Richard,Gurrow
+/Hilary,Swank,Gerrard,Butler
 #Notebook,2005,Nick,Cassaventes,New Line Cinema,1,8
 *A poor and passionate young man falls in love with a rich young woman and gives her a sense of freedom.They soon are separated by their social  differences.
 $Erik,Holmberg,Rick,Reynolds
 %Jeremy,Leven,Jan,Sardi
 /Gena,Rowlands,James,Garner,Rachel,McAdams
+#Taxi,2004,Tim,Story,Trivia,9,6
+*A mouthy and feisty taxicab driver has hot tips for a green and inept cop set on solving a string of New York city bank robberies committed by a quartet of female Brazilian bank robbers.
+$Luc,Besson
+%Luc,Besson
+/Queen,Latifah,Jimmy,Fallon
+#The Scorpion King,2002,Chuck,Russel,Trivia,8,7
+*A desert warrior rises up against the evil army that is destroying his homeland.He captures the enemy's key sorcerer,takes her deep into the desert and prepares for a final showdown.
+$Alvin,Klein
+%Stephen,Sommers
+/Michael,Clark,Steven,Brand
 #Titanic,1997,James,Cameron,New Cinema Line,3,6
 *A seventeen year old aristocrat falls in love with kind,but poor artist aboard the luxurious Titanic.
 $James,Cameron,Pamela,Easily

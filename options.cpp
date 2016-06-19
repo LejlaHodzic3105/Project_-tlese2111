@@ -100,7 +100,6 @@ getline(std::cin,prezime);
 newfilm.setActors(Person(ime,prezime));
 }
 std::cout << "\033[1;34mEnter the name of the production company: \033[0m";
-cin.ignore();
 getline(std::cin,comp);
 newfilm.setCompany(comp);
 std::cout << "\033[1;34mEnter the year of release: \033[0m";
